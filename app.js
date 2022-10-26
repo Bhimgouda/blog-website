@@ -5,6 +5,7 @@ const articleRouter = require("./routes/article");
 const ejsMate = require("ejs-mate");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
+const CustomError = require("./utils/cutomError");
 
 // ----------------------- MIDDLEWARES ---------------------------//
 
@@ -19,13 +20,27 @@ app.engine("ejs", ejsMate);
 // Method Override
 app.use(methodOverride("_method"));
 
-// App Routes
-app.use("/articles", articleRouter);
+// ----------------------- App Routes -------------------------------//
 
-// ----------------------- Basic Integrations -----------------------//
 app.get("/", (req, res) => {
   res.render("home");
 });
+
+app.use("/articles", articleRouter);
+
+app.all("*", (req, res, next) => {
+  next(new CustomError("Page Not Found", 404));
+});
+
+// ----------------------- Error Handling Middleware ------------------//
+
+app.use((err, req, res, next) => {
+  console.log(err.name);
+  const { statusCode = 500, message = "Oh no Something went Wrong!!" } = err;
+  res.send(message);
+});
+
+// ----------------------- Basic Integrations -----------------------//
 
 // Connecting to DB
 mongoose
