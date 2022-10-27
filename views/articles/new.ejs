@@ -1,28 +1,39 @@
-<h1>Publish New Article</h1>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog-Website</title>
+  </head>
+  <body>
+    <h1>Publish New Article</h1>
 
-<form method="POST" action="/articles">
-  <div>
-    <input type="text" name="title" placeholder="title" />
-  </div>
-  <div>
-    <input type="text" name="description" placeholder="description" />
-  </div>
-  <div>
-    <input type="text" name="keywords" placeholder="Add keywords" />
-  </div>
-  <div>
-    <input type="text" name="heroImage" placeholder="Add Image Link" />
-  </div>
-  <div>
-    <textarea
-      type="text"
-      name="content"
-      placeholder="article content"
-      cols="30"
-      rows="10"
-    ></textarea>
-  </div>
-  <button type="submit">Publish</button>
-</form>
+    <form method="POST" action="/articles">
+      <div>
+        <input type="text" name="title" placeholder="title" />
+      </div>
+      <div>
+        <input type="text" name="description" placeholder="description" />
+      </div>
+      <div>
+        <input type="text" name="keywords" placeholder="Add keywords" />
+      </div>
+      <div>
+        <input type="text" name="heroImage" placeholder="Add Image Link" />
+      </div>
+      <div>
+        <textarea
+          type="text"
+          name="content"
+          placeholder="article content"
+          cols="30"
+          rows="10"
+        ></textarea>
+      </div>
+      <button type="submit">Publish</button>
+    </form>
 
-<button><a href="/articles">All Articles</a></button>
+    <button><a href="/articles">All Articles</a></button>
+  </body>
+</html>

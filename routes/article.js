@@ -35,7 +35,6 @@ router.get(
   catchAsync(async (req, res) => {
     const { id } = req.params;
     const article = await Article.findById(id).populate("author");
-    if (!article) throw new CustomError("No article Found at this URL", 404);
     res.render("articles/show", { article });
   })
 );
@@ -46,11 +45,6 @@ router.get(
   catchAsync(async (req, res) => {
     const { id } = req.params;
     const article = await Article.findById(id);
-    if (!article)
-      throw new CustomError(
-        "Cannot Edit, As no article Found at this URL",
-        404
-      );
     res.render("articles/edit", { article });
   })
 );
