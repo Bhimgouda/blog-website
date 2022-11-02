@@ -13,16 +13,14 @@ router.get(
 );
 
 // To render input form
-router.get(
-  "/new",
-  catchAsync((req, res) => {
-    res.render("articles/new");
-  })
-);
+router.get("/new", (req, res) => {
+  res.render("articles/new");
+});
 
 router.post(
   "/",
   catchAsync(async (req, res) => {
+    console.log(req.body);
     const article = new Article(req.body);
     article.author = "63596d0651e2a1a0a72fb1eb";
     const { _id: articleId } = await article.save();

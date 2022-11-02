@@ -5,6 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Blog-Website</title>
+    <link
+      href="https://cdn.quilljs.com/1.0.0/quill.snow.css"
+      rel="stylesheet"
+    />
+    <style>
+      #editor-container {
+        width: 100%;
+        min-height: 100vh;
+      }
+    </style>
   </head>
   <body>
     <h1>Publish New Article</h1>
@@ -22,18 +32,25 @@
       <div>
         <input type="text" name="heroImage" placeholder="Add Image Link" />
       </div>
-      <div>
-        <textarea
-          type="text"
-          name="content"
-          placeholder="article content"
-          cols="30"
-          rows="10"
-        ></textarea>
+
+      <!-- Create the editor container -->
+      <div class="row form-group">
+        <input name="content" type="hidden" />
+        <div id="editor-container">
+          <p>
+            A robot who has developed sentience, and is the only robot of his
+            kind shown to be still functioning on Earth.
+          </p>
+        </div>
       </div>
+
       <button type="submit">Publish</button>
     </form>
-
     <button><a href="/articles">All Articles</a></button>
+    <!-- Include the Quill library -->
+
+    <!-- Initialize Quill editor -->
+    <script src="//cdn.quilljs.com/latest/quill.min.js"></script>
+    <script src="/js/text-editor.js"></script>
   </body>
 </html>
