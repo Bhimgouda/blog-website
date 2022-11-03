@@ -4,13 +4,16 @@ const catchAsync = require("../utils/catchAsync");
 const CustomError = require("../utils/cutomError");
 const router = express.Router();
 const multer = require("multer");
-const upload = multer({ dest: "public/images" });
+const { storage } = require("../cloudinary");
+const upload = multer({
+  storage,
+});
 
-// -- image url generator --//
+// --------------- image url generator for images in text-editor ---------//
 router.post("/image-urls", upload.single("image"), (req, res) => {
   console.log(req.file);
   res.send({
-    url: "https://website-for-pragat.vercel.app/static/media/typewriterImg.5838483e65e28ba87508.webp",
+    url: req.file.path.replace("/upload", "/upload/w_700"),
   });
 });
 
@@ -33,6 +36,7 @@ router.post(
   catchAsync(async (req, res) => {
     const article = new Article(req.body);
     article.author = "63596d0651e2a1a0a72fb1eb";
+    article.heroImage = req.file.path;
     const { _id: articleId } = await article.save();
     res.redirect(`/articles/${articleId}`);
   })

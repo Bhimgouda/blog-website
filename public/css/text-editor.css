@@ -1,0 +1,16 @@
+img {
+    display: block;
+    margin: 50px 10% ;
+}
+
+#editor-container{
+    border: none;
+}
+
+@media screen and (min-width:800px) {
+    #editor-container{
+        padding: 50px 25%;
+        text-align: left;
+        border: none;
+    }
+}

@@ -1,7 +1,7 @@
 var editor = new Quill("#editor-container", {
   modules: {
     toolbar: [
-      [{ header: [1, 2, 3, false] }],
+      [{ header: [2, 3, false] }],
       ["bold", "italic"],
       ["link", "blockquote", "code-block", "image"],
       [{ list: "ordered" }, { list: "bullet" }],
