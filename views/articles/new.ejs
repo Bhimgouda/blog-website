@@ -19,7 +19,7 @@
   <body>
     <h1>Publish New Article</h1>
 
-    <form method="POST" action="/articles">
+    <form method="POST" action="/articles" enctype="multipart/form-data">
       <div>
         <input type="text" name="title" placeholder="title" />
       </div>
@@ -30,7 +30,7 @@
         <input type="text" name="keywords" placeholder="Add keywords" />
       </div>
       <div>
-        <input type="text" name="heroImage" placeholder="Add Image Link" />
+        <input type="file" name="heroImage" placeholder="Add Image Link" />
       </div>
 
       <!-- Create the editor container -->

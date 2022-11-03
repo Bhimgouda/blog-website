@@ -31,9 +31,9 @@ app.get("/", (req, res) => {
 
 app.use("/articles", articleRouter);
 
-app.all("*", (req, res, next) => {
-  next(new CustomError("Page Not Found", 404));
-});
+// app.all("*", (req, res, next) => {
+//   next(new CustomError("Page Not Found", 404));
+// });
 
 // ----------------------- Error Handling Middleware ------------------//
 
