@@ -1,13 +1,15 @@
-<% layout('layout/boilerplate') -%>
-
+<% layout('layout/boilerplate') -%> <% if(currentAuthor){ %>
 <button><a href="/articles/<%=article._id%>/edit">Edit Article</a></button>
+<% } %>
 <h1><%= article.title %></h1>
 <p><%= article.description %></p>
 <img src="<%= article.heroImage  %>" alt="" />
 <div><%- article.content %></div>
-<p>Author: <%= article.author.name %></p>
+<p>Author: <%= article.author.firstName %></p>
+<% if(currentAuthor){ %>
 <form action="/articles/<%= article._id %>?_method=DELETE" method="POST">
   <button type="submit">DELETE Article</button>
 </form>
+<% } %>
 
 <button><a href="/articles">All Articles</a></button>

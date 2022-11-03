@@ -11,7 +11,10 @@ const seedDB = async () => {
   await Article.deleteMany({});
   await Author.deleteMany({});
   const author = new Author({
-    name: "Bhimgouda Patil",
+    firstName: "Bhimgouda",
+    lastName: "Patil",
+    email: "satvikp508@gmail.com",
+    password: "blogwebsite123",
     articles: [],
   });
 

@@ -5,12 +5,13 @@ const CustomError = require("../utils/cutomError");
 const router = express.Router();
 const multer = require("multer");
 const { storage } = require("../cloudinary");
+const { isLoggedIn } = require("../middlewares");
 const upload = multer({
   storage,
 });
 
 // --------------- image url generator for images in text-editor ---------//
-router.post("/image-urls", upload.single("image"), (req, res) => {
+router.post("/image-urls", isLoggedIn, upload.single("image"), (req, res) => {
   console.log(req.file);
   res.send({
     url: req.file.path.replace("/upload", "/upload/w_700"),
@@ -26,12 +27,13 @@ router.get(
 );
 
 // To render input form
-router.get("/new", (req, res) => {
+router.get("/new", isLoggedIn, (req, res) => {
   res.render("articles/new");
 });
 
 router.post(
   "/",
+  isLoggedIn,
   upload.single("heroImage"),
   catchAsync(async (req, res) => {
     const article = new Article(req.body);
@@ -54,6 +56,7 @@ router.get(
 // To render input form
 router.get(
   "/:id/edit",
+  isLoggedIn,
   catchAsync(async (req, res) => {
     const { id } = req.params;
     const article = await Article.findById(id);
@@ -63,6 +66,7 @@ router.get(
 
 router.put(
   "/:id",
+  isLoggedIn,
   catchAsync(async (req, res) => {
     const { id } = req.params;
     await Article.findOneAndUpdate({ _id: id }, req.body);
@@ -72,6 +76,7 @@ router.put(
 
 router.delete(
   "/:id",
+  isLoggedIn,
   catchAsync(async (req, res) => {
     const { id } = req.params;
     await Article.findByIdAndDelete(id);
