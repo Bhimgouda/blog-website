@@ -5,14 +5,13 @@ const CustomError = require("../utils/cutomError");
 const router = express.Router();
 const multer = require("multer");
 const { storage } = require("../cloudinary");
-const { isLoggedIn } = require("../middlewares");
+const { isLoggedIn, isAuthor } = require("../middlewares");
 const upload = multer({
   storage,
 });
 
 // --------------- image url generator for images in text-editor ---------//
 router.post("/image-urls", isLoggedIn, upload.single("image"), (req, res) => {
-  console.log(req.file);
   res.send({
     url: req.file.path.replace("/upload", "/upload/w_700"),
   });
@@ -37,7 +36,7 @@ router.post(
   upload.single("heroImage"),
   catchAsync(async (req, res) => {
     const article = new Article(req.body);
-    article.author = "63596d0651e2a1a0a72fb1eb";
+    article.author = req.author._id;
     article.heroImage = req.file.path;
     const { _id: articleId } = await article.save();
     res.redirect(`/articles/${articleId}`);
@@ -49,6 +48,7 @@ router.get(
   catchAsync(async (req, res) => {
     const { id } = req.params;
     const article = await Article.findById(id).populate("author");
+    console.log(article.author._id);
     res.render("articles/show", { article });
   })
 );
@@ -57,6 +57,7 @@ router.get(
 router.get(
   "/:id/edit",
   isLoggedIn,
+  isAuthor,
   catchAsync(async (req, res) => {
     const { id } = req.params;
     const article = await Article.findById(id);
@@ -67,6 +68,7 @@ router.get(
 router.put(
   "/:id",
   isLoggedIn,
+  isAuthor,
   catchAsync(async (req, res) => {
     const { id } = req.params;
     await Article.findOneAndUpdate({ _id: id }, req.body);
@@ -77,6 +79,7 @@ router.put(
 router.delete(
   "/:id",
   isLoggedIn,
+  isAuthor,
   catchAsync(async (req, res) => {
     const { id } = req.params;
     await Article.findByIdAndDelete(id);

@@ -51,7 +51,6 @@ function saveToServer(file) {
     if (xhr.status === 200) {
       // this is callback data: url
       const url = JSON.parse(xhr.responseText).url;
-      console.log(url);
       insertToEditor(url);
     }
   };
