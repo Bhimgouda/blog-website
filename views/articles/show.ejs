@@ -1,13 +1,19 @@
-<% layout('layout/boilerplate') -%> <%
-if(currentAuthor._id.equals(article.author._id)){ %>
-<button><a href="/articles/<%=article._id%>/edit">Edit Article</a></button>
+<% layout('layout/boilerplate') -%> <% if(currentAuthor &&
+currentAuthor._id.equals(article.author._id)){ %>
+<button><a href="/articles/<%= article._id %>/edit">Edit Article</a></button>
+<% } %>
 <h1><%= article.title %></h1>
-<% console.log(currentAuthor)%> <% } %>
+<a href="/categories/<%= article.category._id %>"
+  ><%=article.category.title%></a
+>
 <p><%= article.description %></p>
 <img src="<%= article.heroImage  %>" alt="" />
 <div><%- article.content %></div>
-<p>Author: <%= article.author.firstName %></p>
-<% if(currentAuthor._id.equals(article.author._id)){ %>
+<p>
+  Author:
+  <a href="/author/<%=article.author._id%>"><%= article.author.name %></a>
+</p>
+<% if(currentAuthor && currentAuthor._id.equals(article.author._id)){ %>
 <form action="/articles/<%= article._id %>?_method=DELETE" method="POST">
   <button type="submit">DELETE Article</button>
 </form>

@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Blog-website</a>
+  <a class="navbar-brand" href="/">Blog-website</a>
   <button
     class="navbar-toggler"
     type="button"
@@ -15,11 +15,14 @@
     <ul class="navbar-nav">
       <li class="nav-item active">
         <a class="nav-link" href="/articles"
-          >Home <span class="sr-only">(current)</span></a
+          >Blog <span class="sr-only">(current)</span></a
         >
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/articles/new">Publish Your Ideas</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/categories/">Categories</a>
       </li>
       <% if(!currentAuthor){ %>
       <p><%= currentAuthor %></p>

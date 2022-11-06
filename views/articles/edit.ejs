@@ -27,7 +27,11 @@
     <%- include('../partials/navbar')%>
     <h1>Publish New Article</h1>
 
-    <form method="POST" action="/articles" enctype="multipart/form-data">
+    <form
+      method="POST"
+      action="/articles/<%= article._id %>?_method=PUT"
+      enctype="multipart/form-data"
+    >
       <div>
         <input
           type="text"
@@ -68,7 +72,7 @@
         <div id="editor-container"><%- article.content %></div>
       </div>
 
-      <button type="submit">Publish</button>
+      <button type="submit">Update Now</button>
     </form>
     <button><a href="/articles">All Articles</a></button>
     <!-- Include the Quill library -->

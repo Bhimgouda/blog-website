@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Article = require("../models/article");
+const Category = require("../models/category");
 const Author = require("../models/author");
 
 mongoose
@@ -10,22 +11,31 @@ mongoose
 const seedDB = async () => {
   await Article.deleteMany({});
   await Author.deleteMany({});
+  await Category.deleteMany({});
+
   const author = new Author({
-    firstName: "Bhimgouda",
-    lastName: "Patil",
+    name: "Bhimgouda Patil",
     email: "satvikp508@gmail.com",
     password: "blogwebsite123",
     articles: [],
   });
 
-  const { _id } = await author.save();
+  const category = new Category({
+    title: "web3",
+    description: "Read amazing articles related to web3",
+    articles: [],
+  });
 
-  for (let i = 0; i < 10; i++) {
+  const { _id: authorId } = await author.save();
+  const { _id: categoryId } = await category.save();
+
+  for (let i = 0; i < 5; i++) {
     const article = new Article({
       title: "Why is the web3 failing and the reason",
       description: `A stablecoin is a cryptocurrency that functions similarly to other
         cryptocurrencies but differs in volatility.`,
-      author: _id,
+      author: authorId,
+      category: categoryId,
       keywords: "web3 crypto",
       heroImage:
         "https://website-for-pragat.vercel.app/static/media/web3.01e6b23a9bf535cd020d.jpg",
@@ -52,7 +62,7 @@ const seedDB = async () => {
           introduced in 2014. It was released on the BitShare blockchain as a token by
           two eminent Blockchain leaders, Charles Hoskinson and Dan Larimer.
         </p>
-        <h2>The Advantages of Stablecoin</h2>
+        <h2>The Advancategoryes of Stablecoin</h2>
         <p>
           Since its inception in 2014, stablecoins have become an important aspect of
           people’s lives, which is visible given their massive market caps. The
@@ -163,8 +173,6 @@ const seedDB = async () => {
       </article>`,
     });
     const { _id: articleId } = await article.save();
-    author.articles.push(articleId);
-    await author.save();
   }
   console.log("Database Seeded Successfully");
   mongoose.disconnect();

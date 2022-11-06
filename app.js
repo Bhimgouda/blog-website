@@ -1,16 +1,17 @@
 if (process.env.NODE_ENV !== "production") require("dotenv").config();
 
+const mongoose = require("mongoose");
 const express = require("express");
 const path = require("path");
 const app = express();
 const articleRouter = require("./routes/article");
 const ejsMate = require("ejs-mate");
-const mongoose = require("mongoose");
 const methodOverride = require("method-override");
 const CustomError = require("./utils/cutomError");
 const session = require("express-session");
-const AuthorRouter = require("./routes/author");
+const authorRouter = require("./routes/author");
 const Author = require("./models/author");
+const categoryRouter = require("./routes/category");
 
 // ----------------------- MIDDLEWARES ---------------------------//
 
@@ -51,10 +52,8 @@ app.use(session(sessionConfig));
 
 app.use(async (req, res, next) => {
   if (req.session.author_id) {
-    const { email, firstName, lastName, _id } = await Author.findById(
-      req.session.author_id
-    );
-    req.author = { email, firstName, lastName, _id };
+    const { email, name, _id } = await Author.findById(req.session.author_id);
+    req.author = { email, name, _id };
   }
   res.locals.currentAuthor = req.author;
   next();
@@ -66,7 +65,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/articles", articleRouter);
-app.use("/author", AuthorRouter);
+app.use("/author", authorRouter);
+app.use("/categories", categoryRouter);
 
 // app.all("*", (req, res, next) => {
 //   next(new CustomError("Page Not Found", 404));
@@ -75,7 +75,7 @@ app.use("/author", AuthorRouter);
 // ----------------------- Error Handling Middleware ------------------//
 
 app.use((err, req, res, next) => {
-  console.log(err.message);
+  console.log(err.stack);
   const { statusCode = 500, message = "Oh no Something went Wrong!!" } = err;
   res.send(message);
 });

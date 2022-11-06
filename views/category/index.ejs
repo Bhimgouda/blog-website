@@ -1,0 +1,12 @@
+<% layout('layout/boilerplate') -%>
+
+<!-- Pending: Have to make this alchemy like category page -->
+<!-- with single index and show page that has filter by categories and pagination for articles -->
+<!-- now we have 2 pages 1 for indexing categories and other for showing articles of that category -->
+<div>
+  <ul>
+    <% for(category of categories){ %>
+    <li><a href="/categories/<%= category._id %>"><%= category.title %></a></li>
+    <% } %>
+  </ul>
+</div>

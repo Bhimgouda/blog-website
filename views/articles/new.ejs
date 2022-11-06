@@ -40,7 +40,11 @@
       <div>
         <input type="file" name="heroImage" placeholder="Add Image Link" />
       </div>
-
+      <select name="category" id="category">
+        <% for(category of categories){ %>
+        <option value="<%= category._id   %>"><%=category.title %></option>
+        <% } %>
+      </select>
       <!-- Create the editor container -->
       <div class="row form-group">
         <input name="content" type="hidden" />

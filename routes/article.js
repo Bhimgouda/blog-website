@@ -6,6 +6,7 @@ const router = express.Router();
 const multer = require("multer");
 const { storage } = require("../cloudinary");
 const { isLoggedIn, isAuthor } = require("../middlewares");
+const Category = require("../models/category");
 const upload = multer({
   storage,
 });
@@ -26,18 +27,24 @@ router.get(
 );
 
 // To render input form
-router.get("/new", isLoggedIn, (req, res) => {
-  res.render("articles/new");
-});
+router.get(
+  "/new",
+  isLoggedIn,
+  catchAsync(async (req, res) => {
+    const categories = await Category.find();
+    res.render("articles/new", { categories });
+  })
+);
 
 router.post(
   "/",
   isLoggedIn,
   upload.single("heroImage"),
   catchAsync(async (req, res) => {
+    console.log(req.body);
     const article = new Article(req.body);
     article.author = req.author._id;
-    article.heroImage = req.file.path;
+    if (req.file) article.heroImage = req.file.path;
     const { _id: articleId } = await article.save();
     res.redirect(`/articles/${articleId}`);
   })
@@ -47,8 +54,9 @@ router.get(
   "/:id",
   catchAsync(async (req, res) => {
     const { id } = req.params;
-    const article = await Article.findById(id).populate("author");
-    console.log(article.author._id);
+    const article = await Article.findById(id)
+      .populate("author")
+      .populate("category");
     res.render("articles/show", { article });
   })
 );
@@ -65,10 +73,12 @@ router.get(
   })
 );
 
+// pending: heroImage is not been updated
 router.put(
   "/:id",
   isLoggedIn,
   isAuthor,
+  upload.single("heroImage"),
   catchAsync(async (req, res) => {
     const { id } = req.params;
     await Article.findOneAndUpdate({ _id: id }, req.body);

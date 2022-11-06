@@ -1,0 +1,8 @@
+<% layout('layout/boilerplate') -%>
+
+<h1>About:<%= author.name %></h1>
+<ul>
+  <% for(article of author.articles){ %>
+  <li><a href="/articles/<%= article._id %>"><%= article.title %></a></li>
+  <% } %>
+</ul>

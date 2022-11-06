@@ -1,0 +1,11 @@
+<% layout('layout/boilerplate') -%>
+<h1>Category: <%=category.title %></h1>
+<p><%= category.description %></p>
+<div>
+  <h2>Articles related to <%= category.title %></h2>
+  <ul>
+    <% for(article of category.articles){ %>
+    <li><a href="/articles/<%= article._id %>"><%= article.title %> </a></li>
+    <% } %>
+  </ul>
+</div>

@@ -17,7 +17,7 @@ exports.isAuthor = catchAsync(async (req, res, next) => {
   const { id } = req.params;
   const article = await Article.findById(id);
   if (!article.author.equals(req.author._id)) {
-    // can flash error
+    // pending: can flash error
     return res.redirect(`/articles/${id}`);
   }
   next();

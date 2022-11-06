@@ -3,8 +3,7 @@ const { Schema } = mongoose;
 const bcrypt = require("bcrypt");
 
 const authorSchema = new Schema({
-  firstName: String,
-  lastName: String,
+  name: String,
   email: String,
   password: String,
   articles: [{ type: Schema.Types.ObjectId, ref: "Article" }],
