@@ -1,0 +1,10 @@
+<div>
+  <span>Table of contents</span>
+  <ul>
+    <% let headings = article.content.split(`<`); headings =
+    headings.filter(heading=>heading[0]==="h") %> <% for(heading of headings ){
+    %>
+    <li><a href="#<%= heading.slice(3).replaceAll(" ","-") %>"><%= heading.slice(3) %></a></li>
+    <% } %>
+  </ul>
+</div>

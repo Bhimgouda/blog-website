@@ -1,22 +1,43 @@
-<% layout('layout/boilerplate') -%> <% if(currentAuthor &&
-currentAuthor._id.equals(article.author._id)){ %>
-<button><a href="/articles/<%= article._id %>/edit">Edit Article</a></button>
-<% } %>
-<h1><%= article.title %></h1>
-<a href="/categories/<%= article.category._id %>"
-  ><%=article.category.title%></a
->
-<p><%= article.description %></p>
-<img src="<%= article.heroImage  %>" alt="" />
-<div><%- article.content %></div>
-<p>
-  Author:
-  <a href="/author/<%=article.author._id%>"><%= article.author.name %></a>
-</p>
-<% if(currentAuthor && currentAuthor._id.equals(article.author._id)){ %>
-<form action="/articles/<%= article._id %>?_method=DELETE" method="POST">
-  <button type="submit">DELETE Article</button>
-</form>
-<% } %>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog-Website</title>
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+  <body>
+    <%- include('../partials/navbar')%> <% if(currentAuthor &&
+    currentAuthor._id.equals(article.author._id)){ %>
+    <button>
+      <a href="/articles/<%= article._id %>/edit">Edit Article</a>
+    </button>
+    <% } %>
+    <h1><%= article.title %></h1>
+    <a href="/categories/<%= article.category._id %>"
+      ><%=article.category.title%></a
+    >
+    <p><%= article.description %></p>
+    <img src="<%= article.heroImage  %>" alt="" />
+    <div class="article__layout">
+      <sidebar class="sticky-container"
+        ><%- include('../partials/sidebar')%></sidebar
+      >
 
-<button><a href="/articles">All Articles</a></button>
+      <div class="article__content"><%- article.content %></div>
+    </div>
+    <p>
+      Author:
+      <a href="/author/<%=article.author._id%>"><%= article.author.name %></a>
+    </p>
+    <% if(currentAuthor && currentAuthor._id.equals(article.author._id)){ %>
+    <form action="/articles/<%= article._id %>?_method=DELETE" method="POST">
+      <button type="submit">DELETE Article</button>
+    </form>
+    <% } %>
+
+    <button><a href="/articles">All Articles</a></button>
+    <script src="/js/show.js"></script>
+  </body>
+</html>

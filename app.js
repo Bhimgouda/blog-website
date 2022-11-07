@@ -13,6 +13,14 @@ const authorRouter = require("./routes/author");
 const Author = require("./models/author");
 const categoryRouter = require("./routes/category");
 
+// pending: I need to query the database in a effecient manner after learning some mongodb querying concepts
+// pending: I have to only get required data from the db instead of loading the full content of the articles sometimes
+// pending: I have to validate new and edit routes req.body before adding anything to db both client and server
+// pending: I have to flash messages using flash module
+// pending: I have to add a add a category page(if possible on publishing page)
+// pending: The text-editor should have an option to add alt text for the image
+// pending: If i can include yoast seo somehow by making api calls or something
+
 // ----------------------- MIDDLEWARES ---------------------------//
 
 // Body parser
