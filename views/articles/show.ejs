@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blog-Website</title>
+    <title><%= article.title %></title>
+    <meta name="description" content="<%= article.description %> " />
     <link rel="stylesheet" href="/css/main.css" />
   </head>
   <body>
@@ -14,30 +15,46 @@
       <a href="/articles/<%= article._id %>/edit">Edit Article</a>
     </button>
     <% } %>
-    <h1><%= article.title %></h1>
-    <a href="/categories/<%= article.category._id %>"
-      ><%=article.category.title%></a
-    >
-    <p><%= article.description %></p>
-    <img src="<%= article.heroImage  %>" alt="" />
-    <div class="article__layout">
-      <sidebar class="sticky-container"
-        ><%- include('../partials/sidebar')%></sidebar
-      >
 
-      <div class="article__content"><%- article.content %></div>
+    <div class="article__header">
+      <div class="article__bg-image">
+        <img src="<%= article.heroImage  %>" alt="" />
+      </div>
+      <div class="article__info">
+        <a
+          class="tags tags--white"
+          href="/categories/<%= article.category._id %>"
+          ><%=article.category.title%></a
+        >
+        <h1 class="article__title"><%= article.title %></h1>
+        <span class="article__tagline"><%= article.description %></span>
+      </div>
     </div>
-    <p>
-      Author:
-      <a href="/author/<%=article.author._id%>"><%= article.author.name %></a>
-    </p>
+    <article class="article__body">
+      <div class="article__layout">
+        <sidebar class="sticky-container"
+          ><div class="sticky-container">
+            <%- include('../partials/sidebar')%>
+          </div>
+        </sidebar>
+        <div class="article container">
+          <img
+            class="article__heroImage"
+            src="<%= article.heroImage%>"
+            alt=""
+          />
+          <%- article.content %>
+        </div>
+      </div>
+    </article>
+
     <% if(currentAuthor && currentAuthor._id.equals(article.author._id)){ %>
     <form action="/articles/<%= article._id %>?_method=DELETE" method="POST">
       <button type="submit">DELETE Article</button>
     </form>
     <% } %>
-
     <button><a href="/articles">All Articles</a></button>
+    <%- include('../partials/footer')%>
     <script src="/js/show.js"></script>
   </body>
 </html>

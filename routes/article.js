@@ -21,7 +21,9 @@ router.post("/image-urls", isLoggedIn, upload.single("image"), (req, res) => {
 router.get(
   "/",
   catchAsync(async (req, res) => {
-    const articles = await Article.find();
+    const articles = await Article.find()
+      .populate("category")
+      .populate("author");
     res.render("articles/index", { articles });
   })
 );
