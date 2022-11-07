@@ -1,5 +1,5 @@
 <nav class="navbar">
-  <a href="/blogs">
+  <a href="/">
     <div class="logo-container">
       <svg width="138" height="20" xmlns="http://www.w3.org/2000/svg">
         <path
@@ -18,7 +18,14 @@
     </div>
     <ul class="nav__links">
       <a href="/articles" class="nav__link">Blogs</a>
-      <a href="#" class="nav__link">About Us</a>
+      <a href="/articles/new">Publish an Epic</a>
+
+      <% if(!currentAuthor){ %>
+      <a href="/author/login" class="nav__link">Login</a>
+      <a href="/author/register" class="nav__link">Register</a>
+      <% }else{ %>
+      <a href="/author/logout" class="nav__link">Logout</a>
+      <% } %>
     </ul>
   </div>
 </nav>

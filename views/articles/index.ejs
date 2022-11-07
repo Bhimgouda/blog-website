@@ -1,10 +1,10 @@
 <% layout('layout/boilerplate') -%>
 
-<h1 style="text-align: center; margin-top: 10rem">Blogs</h1>
+<h1 class="index-heading">An Overview</h1>
 <section class="container section--posts grid grid--cols-3">
   <% articles.forEach(article=>{ %>
-  <a href="/articles/<%= article._id %>">
-    <article class="card">
+  <article class="card">
+    <a href="/articles/<%= article._id %>">
       <section class="card__header">
         <img
           class="articleImg"
@@ -21,20 +21,21 @@
                 <img src="<%= article.heroImage %> " alt="" />
               </div>
               <div class="author__div2">
-                <span class="author__name"><%= article.author.name %></span>
-                <span class="publish-date"><%= article.publishDate %> </span>
+                <span class="author__name"
+                  ><%= article.author.name.split(" ")[0] %></span
+                >
+                <span class="publish-date"><%= article.datePublished %> </span>
               </div>
             </div>
           </div>
           <h2 class="card__title"><%= article.title %></h2>
           <p class="card-text"><%= article.description %></p>
           <div class="category">
-            <label class="tags"><%=article.category.title%></label>
+            <label class="tags tags--filled"><%=article.category.title%></label>
           </div>
         </div>
       </section>
-    </article>
-  </a>
+    </a>
+  </article>
   <% }) %>
 </section>
-<button><a href="/articles/new">Publish New Article</a></button>

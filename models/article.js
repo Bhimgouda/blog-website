@@ -17,6 +17,7 @@ const articleSchema = new Schema({
   },
   heroImage: String,
   content: String,
+  datePublished: String,
 });
 
 // ----- When a article is published then it is even added to the authors list of articles -----//

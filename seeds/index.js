@@ -37,6 +37,7 @@ const seedDB = async () => {
       author: authorId,
       category: categoryId,
       keywords: "web3 crypto",
+      datePublished: "10/07/2022",
       heroImage:
         "https://website-for-pragat.vercel.app/static/media/web3.01e6b23a9bf535cd020d.jpg",
       content: `

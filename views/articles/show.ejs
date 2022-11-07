@@ -22,7 +22,7 @@
       </div>
       <div class="article__info">
         <a
-          class="tags tags--white"
+          class="tags tags--filled tags--big"
           href="/categories/<%= article.category._id %>"
           ><%=article.category.title%></a
         >
@@ -32,10 +32,8 @@
     </div>
     <article class="article__body">
       <div class="article__layout">
-        <sidebar class="sticky-container"
-          ><div class="sticky-container">
-            <%- include('../partials/sidebar')%>
-          </div>
+        <sidebar class="sticky-container">
+          <%- include('../partials/sidebar')%>
         </sidebar>
         <div class="article container">
           <img
@@ -52,9 +50,7 @@
     <form action="/articles/<%= article._id %>?_method=DELETE" method="POST">
       <button type="submit">DELETE Article</button>
     </form>
-    <% } %>
-    <button><a href="/articles">All Articles</a></button>
-    <%- include('../partials/footer')%>
+    <% } %> <%- include('../partials/footer')%>
     <script src="/js/show.js"></script>
   </body>
 </html>
