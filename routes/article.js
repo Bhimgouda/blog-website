@@ -13,6 +13,7 @@ const upload = multer({
 
 // --------------- image url generator for images in text-editor ---------//
 router.post("/image-urls", isLoggedIn, upload.single("image"), (req, res) => {
+  console.log(req.file.path.replace("/upload", "/upload/w_700"))
   res.send({
     url: req.file.path.replace("/upload", "/upload/w_700"),
   });

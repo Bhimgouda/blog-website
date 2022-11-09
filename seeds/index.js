@@ -14,32 +14,41 @@ const seedDB = async () => {
   await Category.deleteMany({});
 
   const author = new Author({
-    name: "Bhimgouda Patil",
-    email: "satvikp508@gmail.com",
+    name: "Pragat Vyawahare",
+    email: "vyawaharepragat@gmail.com",
     password: "blogwebsite123",
     articles: [],
   });
 
   const category = new Category({
     title: "web3",
-    description: "Read amazing articles related to web3",
+    description: "All articles and guides related to web3",
     articles: [],
   });
 
   const { _id: authorId } = await author.save();
   const { _id: categoryId } = await category.save();
 
-  for (let i = 0; i < 5; i++) {
+  const heroImages = [
+    "https://miro.medium.com/max/828/0*19YkNq6MZsxRY60I",
+    "https://miro.medium.com/max/640/1*bTl5Mu1_CDQ-iQAQ1uKgyA.png",
+    "https://miro.medium.com/max/828/1*qb37P7F1P5yaZpcMRfxZDg.png",
+    "https://miro.medium.com/max/828/1*v08yVa1EMIoNPim8wQOb1Q.png",
+    "https://miro.medium.com/max/828/1*21naLir4yYv3T6Eyuk9KgQ.png",
+    "https://miro.medium.com/max/828/1*pgTgoLoFWYcycU7R8i3S4g.png",
+  ];
+
+  for (let i = 0; i < 6; i++) {
     const article = new Article({
-      title: "Why is the web3 failing and the reason",
+      title: "Stable Coin: Types, Benefits, and Everything You Need to Know",
       description: `A stablecoin is a cryptocurrency that functions similarly to other
         cryptocurrencies but differs in volatility.`,
+      tagline: "An easy-to-understand guide on Stablecoin",
       author: authorId,
       category: categoryId,
       keywords: "web3 crypto",
       datePublished: "10/07/2022",
-      heroImage:
-        "https://website-for-pragat.vercel.app/static/media/web3.01e6b23a9bf535cd020d.jpg",
+      heroImage: heroImages[i],
       content: `
         <p>
           A stablecoin is a cryptocurrency that functions similarly to other

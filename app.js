@@ -7,7 +7,6 @@ const app = express();
 const articleRouter = require("./routes/article");
 const ejsMate = require("ejs-mate");
 const methodOverride = require("method-override");
-const CustomError = require("./utils/cutomError");
 const session = require("express-session");
 const authorRouter = require("./routes/author");
 const Author = require("./models/author");

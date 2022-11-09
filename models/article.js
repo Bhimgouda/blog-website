@@ -7,6 +7,7 @@ const articleSchema = new Schema({
   title: String,
   description: String,
   keywords: String, // May be I have to change this to a string
+  tagline: String,
   author: {
     type: Schema.Types.ObjectId,
     ref: "Author",

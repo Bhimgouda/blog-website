@@ -6,51 +6,86 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Publish Article</title>
     <link
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans%3A300,400,600,700"
+      rel="stylesheet"
+    />
+    <link
       href="https://cdn.quilljs.com/1.0.0/quill.snow.css"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/css/text-editor.css" />
-    <link rel="stylesheet" href="/css/main.css" />
-    <style>
-      #editor-container {
-        width: 100%;
-        min-height: 100vh;
-      }
-    </style>
+    <link rel="stylesheet" href="/css/main.css">
   </head>
   <body>
     <%- include('../partials/navbar')%>
-    <h1>Publish New Article</h1>
 
     <form method="POST" action="/articles" enctype="multipart/form-data">
-      <div>
-        <input type="text" name="title" placeholder="title" />
-      </div>
-      <div>
-        <input type="text" name="description" placeholder="description" />
-      </div>
-      <div>
-        <input type="text" name="keywords" placeholder="Add keywords" />
-      </div>
-      <div>
-        <input type="file" name="heroImage" placeholder="Add Image Link" />
-      </div>
-      <select name="category" id="category">
-        <% for(category of categories){ %>
-        <option value="<%= category._id   %>"><%=category.title %></option>
-        <% } %>
-      </select>
+
       <!-- Create the editor container -->
-      <div class="row form-group">
-        <input name="content" type="hidden" />
-        <div id="editor-container"></div>
+      <div id="tooltip-controls">
+        <button class="tooltip-1" id="bold"><i class="fa fa-bold"></i></button>
+        <button class="tooltip-1" id="italic"><i class="fa fa-italic"></i></button>
+        <button class="tooltip-1" id="link"><i class="fa fa-link"></i></button>
+        <button class="tooltip-2" id="header-1"><i class="fa fa-header"><sub>1</sub></i></button>
+        <button class="tooltip-2" id="header-2"><i class="fa fa-header"><sub>2</sub></i></button>
+        <button class="tooltip-2" id="header-3"><i class="fa fa-header"><sub>3</sub></i></button>
+        <button class="tooltip-2" id="blockquote"><i class="fa fa-quote-right"></i></button>
+      </div>
+      <div id="sidebar-controls">
+        <button id="show-controls"><i class="fa fa-plus"></i></button>
+        <span class="controls">
+          <button id="image-button"><i class="fa fa-camera"></i></button>
+        </span>
+      </div>
+      <input name="content" type="hidden" />
+      <div id="editor-container">
+        <h1>Title...</h1>
+        <p>Tell your story...</p>
       </div>
 
-      <button type="submit">Publish</button>
+      <!-- Meta deta And SEO inputs -->
+      <div class="seo-inputs ">
+        <h2 class="seo-heading">Fill It Up If you aspire to rank on GOOGLE</h2>
+        <div>
+          <input type="hidden" type="text" name="title" placeholder="title" />
+        </div>
+        <div>
+          <!-- <label class="label" for="description">Add A Description*</label> -->
+          <textarea rows="3" id="description" type="text" name="description" placeholder="Description" ></textarea>
+        </div>
+        <div>
+          <!-- <label class="label" for="tagline">Add a Tagline*</label> -->
+          <input id="tagline" type="text" name="tagline" placeholder="Tagline" />
+        </div>
+        <div>
+          <!-- <label class="label" for="keywords">Add a Few Keywords*</label> -->
+          <input id="keywords" type="text" name="keywords" placeholder="Add keywords" />
+        </div>
+        <div>
+          <!-- <label class="label" for="category">Choose A Category*</label> -->
+          <select name="category" id="category">
+            <% for(category of categories){ %>
+            <option value="<%= category._id   %>"><%=category.title %></option>
+            <% } %>
+          </select>
+        </div>
+        <div>
+          <!-- <label class="label" for="heroImage">Add A Hero-Image*</label> -->
+          <input type="file" name="heroImage" id="heroImage" placeholder="Add Image Link" />
+        </div>
+      </div>
+      <button class="btn--publish" type="submit">Publish</button>
     </form>
     <!-- Include the Quill library -->
 
     <!-- Initialize Quill editor -->
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <script src="https://platform.twitter.com/widgets.js"></script>
     <script src="//cdn.quilljs.com/latest/quill.min.js"></script>
     <script src="/js/text-editor.js"></script>
   </body>

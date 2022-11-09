@@ -1,14 +1,227 @@
 
-#editor-container{
-    border: none;
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/poppins-regular-webfont.woff2') format('woff2'),
+       url('/fonts/poppins-regular-webfont.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
 }
+
+:root{
+  --font-poppins:  'Poppins', sans-serif;
+}
+
+/* #editor-container{
+    border: none;
+} */
+
+* {
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  body{
+    font-family: var(--font-poppins);
+  }
+  
+  #editor-container {
+    font-family: 'Open Sans', Helvetica, sans-serif;
+    font-size: 1.2em;
+    margin: 0 auto;
+    max-width: 950px;
+    min-height: 120vh;
+    background-color: white;
+    color: rgba(0,0,0,.84);
+    font-family: 'Times New Roman', Times, serif;
+    text-align: left;
+  }
+
+  .seo-heading{
+    text-align: center;
+    font-size: 2.8rem;
+    font-family: var(--font-poppins);
+    font-weight: 900;
+    margin-top: 50px;
+  }
+  
+  .seo-inputs{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: var(--font-poppins);
+  }
+
+  .seo-inputs div{
+    margin: 5px;
+    width: 100%;
+    max-width: 650px;;
+  }
+  
+  .seo-inputs div input,.seo-inputs div textarea,.seo-inputs select {
+    border-radius: 5px;
+    width: 100%;
+    padding: 10px;
+  }
+
+  #heroImage{
+    padding: 0;
+  }
+
+  .label{
+    font-size: 1.5rem;
+    color: grey;
+    padding-bottom: 10px;
+  }
+
+  .btn--publish{
+    padding: 5px;
+    font-family: var(--font-poppins);
+    margin-top: 50px;
+    width: 100%;
+  }
+
+  #editor-container .ql-editor {
+    min-height: 100%;
+    height: inherit;
+    overflow-y: inherit;
+  }
+  #editor-container .ql-editor > * {
+    margin-top: 1.5em;
+  }
+  #editor-container .ql-editor > *:last-child {
+    margin-bottom: 50px;
+  }
+  #editor-container h1 + p,
+  #editor-container h2 + p {
+    margin-top: 0.5em; 
+  }
+  #editor-container blockquote {
+    border-left: 4px solid #111;
+    padding-left: 1em;
+  }
+  #editor-container hr {
+    border: none;
+    color: #111;
+    letter-spacing: 1em;
+    text-align: center;
+  }
+  #editor-container hr:before {
+    content: '...';
+  }
+  
+  #tooltip-controls {
+    background-color: #111;
+    border-radius: 4px;
+    display: none;
+    padding: 5px 10px;
+    position: absolute;
+  }
+  #tooltip-controls::before {
+    box-sizing: border-box;
+    border-bottom: 6px solid #111;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    content: ' ';
+    display: block;
+    height: 6px;
+    left: 50%;
+    position: absolute;
+    margin-left: -6px;
+    margin-top: -6px;
+    top: 0;
+    width: 6px;
+  }
+  #tooltip-controls button {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+  }
+  #tooltip-controls button.active {
+    color: #21b384;
+  }
+  
+  #sidebar-controls {
+    display: none;
+    position: absolute;
+  }
+  #sidebar-controls button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+  }
+  #sidebar-controls i.fa {
+    background-color: #fff;
+    border: 1px solid #111;
+    border-radius: 50%;
+    color: #111;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+  }
+  #sidebar-controls .controls {
+    display: none;
+    margin-left: 15px;
+  }
+  #sidebar-controls #show-controls i.fa::before {
+    content: "\f067";
+  }
+  #sidebar-controls.active .controls {
+    display: inline-block;
+  }
+  #sidebar-controls.active #show-controls i.fa::before {
+    content: "\f00d";
+  }
+  
+  #tooltip-controls button {
+    cursor: pointer;
+    display: inline-block;
+    font-size: 18px;
+    padding: 0;
+    height: 32px;
+    width: 32px;
+    text-align: center;
+  }
+  #sidebar-controls button {
+    cursor: pointer;
+    display: inline-block;
+    font-size: 18px;
+    padding: 0;
+    height: 32px;
+    width: 32px;
+    text-align: center;
+  }
+
+
+  button:active, button:focus {
+    outline: none;
+  }
 
 
 
 @media screen and (min-width:800px) {
-    #editor-container{
-        padding: 50px 25%;
-        text-align: left;
+  .container{
+    max-width: 950px;
+    margin: 0 auto;
+  }
+
+  #editor-container{
+    margin: 50px auto;
+        padding: 50px 100px;  
         border: none;
-    }
+        border-radius: 20px;
+  }
+  .seo-inputs{
+    align-items: flex-start;
+  }
+
+  .seo-heading{
+    margin-bottom: 10px;
+    margin-left: 10px;
+  }
 }
