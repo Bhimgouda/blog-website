@@ -4,7 +4,7 @@ const Article = require("../models/article");
 const Category = require("../models/category");
 const Author = require("../models/author");
 
-const dbUrl = process.env.NODE_ENV || "mongodb://localhost:27017/blog-website";
+const dbUrl = process.env.MONGODB_URI || "mongodb://localhost:27017/blog-website";
 
 mongoose
   .connect(dbUrl)

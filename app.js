@@ -23,7 +23,7 @@ const MongoStore = require("connect-mongo")
 // pending: If i can include yoast seo somehow by making api calls or something
 // pending: Create an author Box after article
 
-const dbUrl = process.env.NODE_ENV || "mongodb://localhost:27017/blog-website";
+const dbUrl = process.env.MONGODB_URI || "mongodb://localhost:27017/blog-website";
 
 // ----------------------- MIDDLEWARES ---------------------------//
 
