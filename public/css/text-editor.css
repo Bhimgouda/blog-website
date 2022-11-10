@@ -7,8 +7,17 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'PT-serif';
+  src: url('/fonts/ptserif-regular-webfont.woff2') format('woff2'),
+       url('/fonts/ptserif-regular-webfont.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
 :root{
   --font-poppins:  'Poppins', sans-serif;
+  --font-pt-serif:  'PT-serif', sans-serif;
 }
 
 /* #editor-container{
@@ -31,15 +40,16 @@
   }
   
   #editor-container {
-    font-family: 'Open Sans', Helvetica, sans-serif;
-    font-size: 1.2em;
+    font-size: 2rem;
     margin: 0 auto;
     max-width: 950px;
     min-height: 120vh;
     background-color: white;
-    color: rgba(0,0,0,.84);
-    font-family: 'Times New Roman', Times, serif;
+    color: rgba(34, 34, 34, 0.84);
+    font-family: var(--font-pt-serif);
     text-align: left;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   .seo-heading{

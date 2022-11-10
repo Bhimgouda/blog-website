@@ -21,6 +21,8 @@
 
 
 
+
+
 /* Project Essentials */
 html{
     font-size: 62.5%;
@@ -62,12 +64,8 @@ img{
     --fs-regular-desktop:1.8rem;
     --fs-nav-links:1.6rem;
 
-
-    --font-inter-regular: 'Inter-regular', sans-serif;
-    --font-inter-medium: 'Inter-medium', sans-serif;
     --font-inter-bold : 'Inter-bold', sans-serif;
     --font-poppins:  'Poppins', sans-serif;
- 
 }
 
 
@@ -436,9 +434,10 @@ a{
     color: #d9dee9;
     font-size: 7rem;
     line-height: 100px;
-    width: 80%;
+    width: 90%;
     font-family: Inter,sans-serif;
     font-weight: 900;
+    letter-spacing: -4px;
 }
 
 
