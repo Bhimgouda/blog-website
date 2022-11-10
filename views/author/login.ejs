@@ -1,10 +1,14 @@
 <% layout('layout/boilerplate') -%>
-<div>
-  <form method="POST" action="/author/login">
-    <label for="email">Email</label>
-    <input name="email" id="email" type="text" />
-    <label for="password">Password</label>
-    <input name="password" id="password" type="password" />
-    <button type="submit">Login</button>
+<div class="login">
+  <form  method="POST" action="/author/login">
+    <div>
+      <label class="label" for="email">Email*</label>
+      <input name="email" id="email" type="text" />
+    </div>
+    <div>
+      <label class="label" for="password">Password*</label>
+      <input name="password" id="password" type="password" />
+    </div>
+    <button class="btn btn--filled" type="submit">Login</button>
   </form>
 </div>

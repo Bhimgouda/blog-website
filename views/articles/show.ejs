@@ -9,13 +9,16 @@
     <link rel="stylesheet" href="/css/main.css" />
   </head>
   <body>
-    <%- include('../partials/navbar')%> <% if(currentAuthor &&
+    
+    <%- include('../partials/flash')%>
+    <%- include('../partials/navbar')%>
+    
+    <% if(currentAuthor &&
     currentAuthor._id.equals(article.author._id)){ %>
     <button>
       <a href="/articles/<%= article._id %>/edit">Edit Article</a>
     </button>
     <% } %>
-
     <div class="article__header">
       <div class="article__bg-image">
         <img src="<%= article.heroImage  %>" alt="" />
@@ -51,6 +54,6 @@
       <button type="submit">DELETE Article</button>
     </form>
     <% } %> <%- include('../partials/footer')%>
-    <script src="/js/show.js"></script>
+    <script src="/js/main.js"></script>
   </body>
 </html>

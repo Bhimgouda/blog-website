@@ -15,10 +15,11 @@ router.post(
     const { password, email, name } = req.body;
     const registeredAuthor = await Author.findOne({ email });
     if (registeredAuthor)
-      throw new CustomError("Author Already registered With us", 403);
+      throw new CustomError("User Already registered, Please Login", 403);
     const author = new Author({ email, password, name });
     await author.save();
     req.session.author_id = author._id;
+    req.flash('success',"You have been successfully registered with Us")
     const redirectUrl = req.session.returnTo || "/articles";
     res.redirect(redirectUrl);
   })
@@ -35,6 +36,7 @@ router.post(
     const author = await Author.authenticate(email, password);
     if (!author) throw new CustomError("Invalid email or password");
     req.session.author_id = author._id;
+    req.flash("success", `Welcome Back ${author.name.split(' ')[0]}`);
     const redirectUrl = req.session.returnTo || "/articles";
     res.redirect(redirectUrl);
   })
@@ -42,6 +44,7 @@ router.post(
 
 router.get("/logout", (req, res) => {
   req.session.author_id = null;
+  req.flash("success","You have been Logged out Successfully");
   res.redirect("/author/login");
 });
 

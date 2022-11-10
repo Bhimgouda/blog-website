@@ -49,6 +49,7 @@ router.post(
     article.author = req.author._id;
     if (req.file) article.heroImage = req.file.path;
     const { _id: articleId } = await article.save();
+    req.flash("success","Your article is now Live");
     res.redirect(`/articles/${articleId}`);
   })
 );
@@ -85,6 +86,7 @@ router.put(
   catchAsync(async (req, res) => {
     const { id } = req.params;
     await Article.findOneAndUpdate({ _id: id }, req.body);
+    req.flash("success", "Article has been updated SuccessFully");
     res.redirect(`/articles/${id}`);
   })
 );

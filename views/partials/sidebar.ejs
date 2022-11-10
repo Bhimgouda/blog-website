@@ -3,9 +3,11 @@
     <% let headings = article.content.split(`<`); headings =
     headings.filter(heading=>heading[0]==="h") %> <% for(heading of headings ){
     %>
+    <a href="#<%= heading.slice(3).replaceAll(" ","-") %>">
     <div class="toc__content">
-      <a href="#<%= heading.slice(3).replaceAll(" ","-") %>"><%= heading.slice(3) %></a>
-    </div>
+      <%= heading.slice(3) %>
+      </div>
+      </a>
     <% } %>
 
 </div>

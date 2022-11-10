@@ -11,14 +11,16 @@ const session = require("express-session");
 const authorRouter = require("./routes/author");
 const Author = require("./models/author");
 const categoryRouter = require("./routes/category");
+const flash = require("connect-flash")
 
 // pending: I need to query the database in a effecient manner after learning some mongodb querying concepts
 // pending: I have to only get required data from the db instead of loading the full content of the articles sometimes
 // pending: I have to validate new and edit routes req.body before adding anything to db both client and server
-// pending: I have to flash messages using flash module
-// pending: I have to add a add a category page(if possible on publishing page)
+// pending: I have to flash messages using flash module  // half done
+// pending: I have to add a add a category page(if possible on publishing page) // done
 // pending: The text-editor should have an option to add alt text for the image
 // pending: If i can include yoast seo somehow by making api calls or something
+// pending: Create an author Box after article
 
 // ----------------------- MIDDLEWARES ---------------------------//
 
@@ -54,6 +56,7 @@ const sessionConfig = {
 };
 
 app.use(session(sessionConfig));
+app.use(flash())
 
 // res.locals and adding req.author to request if the author_id is present
 
@@ -63,6 +66,8 @@ app.use(async (req, res, next) => {
     req.author = { email, name, _id };
   }
   res.locals.currentAuthor = req.author;
+  res.locals.success = req.flash("success")
+  res.locals.error = req.flash("error")
   next();
 });
 // ----------------------- App Routes -------------------------------//
@@ -84,7 +89,8 @@ app.use("/categories", categoryRouter);
 app.use((err, req, res, next) => {
   console.log(err.stack);
   const { statusCode = 500, message = "Oh no Something went Wrong!!" } = err;
-  res.send(message);
+  req.flash("error",message)
+  res.status(statusCode).redirect(req.originalUrl)
 });
 
 // ----------------------- Basic Integrations -----------------------//
