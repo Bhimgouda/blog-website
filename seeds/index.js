@@ -1,10 +1,13 @@
+if (process.env.NODE_ENV !== "production") require("dotenv").config();
 const mongoose = require("mongoose");
 const Article = require("../models/article");
 const Category = require("../models/category");
 const Author = require("../models/author");
 
+const dbUrl = process.env.NODE_ENV || "mongodb://localhost:27017/blog-website";
+
 mongoose
-  .connect("mongodb://localhost:27017/blog-website")
+  .connect(dbUrl)
   .then(() => console.log("MongoDB connected"))
   .catch((e) => console.log(e));
 
