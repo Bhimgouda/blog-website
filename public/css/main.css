@@ -446,7 +446,7 @@ a{
 
 .navbar{
     z-index: 10;
-    background: linear-gradient(90deg,var(--color-main-black),var(--color-main-violet),var(--color-main-black));
+    background: linear-gradient(90deg,var(--color-main-violet),var(--color-main-black));
     display: flex;
     align-items: center;
     justify-content: space-between;
