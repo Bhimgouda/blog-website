@@ -14,15 +14,6 @@ const categoryRouter = require("./routes/category");
 const flash = require("connect-flash")
 const MongoStore = require("connect-mongo")
 
-// pending: I need to query the database in a effecient manner after learning some mongodb querying concepts
-// pending: I have to only get required data from the db instead of loading the full content of the articles sometimes
-// pending: I have to validate new and edit routes req.body before adding anything to db both client and server
-// pending: I have to flash messages using flash module  // half done
-// pending: I have to add a add a category page(if possible on publishing page) // done
-// pending: The text-editor should have an option to add alt text for the image
-// pending: If i can include yoast seo somehow by making api calls or something
-// pending: Create an author Box after article
-
 const dbUrl = process.env.MONGODB_URI || "mongodb://localhost:27017/blog-website";
 
 // ----------------------- MIDDLEWARES ---------------------------//
