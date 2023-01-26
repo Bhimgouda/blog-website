@@ -1,13 +1,11 @@
-<div class="toc sticky-container"">
+<div id="toc" class="toc sticky-container">
   <div class="toc__heading">Table of contents</div>
     <% let headings = article.content.split(`<`); headings =
-    headings.filter(heading=>heading[0]==="h") %> <% for(heading of headings ){
+    headings.filter(heading=>heading[0]==="h") %> 
+    <% headings.forEach((heading, index)=>{
     %>
-    <a href="#<%= heading.slice(3).replaceAll(" ","-") %>">
-    <div class="toc__content">
+    <div data-toc="heading-<%=index%>" class="toc__content line-clamp-1">
       <%= heading.slice(3) %>
-      </div>
-      </a>
-    <% } %>
-
+    </div>
+    <% }) %>
 </div>

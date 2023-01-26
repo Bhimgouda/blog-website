@@ -12,7 +12,8 @@ const authorRouter = require("./routes/author");
 const Author = require("./models/author");
 const categoryRouter = require("./routes/category");
 const flash = require("connect-flash")
-const MongoStore = require("connect-mongo")
+const MongoStore = require("connect-mongo");
+const CustomError = require("./utils/cutomError");
 
 const dbUrl = process.env.MONGODB_URI || "mongodb://localhost:27017/blog-website";
 
@@ -75,16 +76,16 @@ app.use(async (req, res, next) => {
 // ----------------------- App Routes -------------------------------//
 
 app.get("/", (req, res) => {
-  res.render("home");
+  res.redirect("/articles");
 });
 
 app.use("/articles", articleRouter);
 app.use("/author", authorRouter);
 app.use("/categories", categoryRouter);
 
-// app.all("*", (req, res, next) => {
-//   next(new CustomError("Page Not Found", 404));
-// });
+app.get("*", (req, res, next) => {
+  res.render("notFound")
+});
 
 // ----------------------- Error Handling Middleware ------------------//
 
@@ -92,7 +93,7 @@ app.use((err, req, res, next) => {
   console.log(err.stack);
   const { statusCode = 500, message = "Oh no Something went Wrong!!" } = err;
   req.flash("error",message)
-  res.status(statusCode).redirect(req.originalUrl)
+  res.status(statusCode).send(message)
 });
 
 // ----------------------- Basic Integrations -----------------------//

@@ -7,6 +7,9 @@
     <title><%= article.title %></title>
     <meta name="description" content="<%= article.description %> " />
     <link rel="stylesheet" href="/css/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap" rel="stylesheet">
   </head>
   <body>
     
@@ -35,18 +38,54 @@
     </div>
     <article class="article__body">
       <div class="article__layout">
-        <sidebar class="sticky-container">
-          <%- include('../partials/sidebar')%>
-        </sidebar>
-        <div class="article container">
+
+      <div class="author-box--desktop">
+        <div class="author sticky-container">
+          <img src="https://media.licdn.com/dms/image/D4D03AQHd6LmaX_AL-g/profile-displayphoto-shrink_400_400/0/1673347814750?e=1680134400&v=beta&t=amDenRkzAQirxXdvIpikH3PGsrXDieGommkK7QNj4Ak" alt="">
+          <div class="author__info">
+            <p class="author__name"><%=article.author.name%></p>
+            <span class="author__about line-clamp-2">Blockchain, Crypto and Web 3 writer. Connect with me if you are looking to elevate your content game.</span>
+             <% if(article.dateLastUpdated){ %>
+            <p class="publish-date"> Updated on <%= article.dateLastUpdated %>
+            <%}else{%>
+            <p class="publish-date">Published on <%= article.datePublished %></p>
+            <%}%>
+          </div>
+       </div>
+      </div>
+
+        <div class="article">
           <img
             class="article__heroImage"
             src="<%= article.heroImage%>"
             alt=""
           />
-          <%- article.content %>
+          <%- article.content%>
+          
+          <div id="author-box" class="author-box--mobile">
+            <div class="author">
+              <img src="https://media.licdn.com/dms/image/D4D03AQHd6LmaX_AL-g/profile-displayphoto-shrink_400_400/0/1673347814750?e=1680134400&v=beta&t=amDenRkzAQirxXdvIpikH3PGsrXDieGommkK7QNj4Ak" alt="">
+              <div class="author__info">
+                <% if(article.dateLastUpdated){ %>
+                <p class="publish-date"> Updated on <%= article.dateLastUpdated %>
+                <%}else{%>
+                <p class="publish-date">Published on <%= article.datePublished %></p>
+                <%}%>
+                <p class="author__name"><%=article.author.name%></p>
+                <span class="author__about line-clamp-2">Blockchain, Crypto and Web 3 writer. Connect with me if you are looking to elevate your content game.</span>
+              </div>
+            </div>
+          </div>
         </div>
+
+        <sidebar>
+          <%- include('../partials/sidebar')%>
+        </sidebar>
+
       </div>
+
+
+
     </article>
 
     <% if(currentAuthor && currentAuthor._id.equals(article.author._id)){ %>

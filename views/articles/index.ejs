@@ -1,7 +1,7 @@
 <% layout('layout/boilerplate') -%>
 
-<h1 class="index-heading">An Overview</h1>
-<section class="container section--posts grid grid--cols-3">
+<!-- <h1 class="index-heading">An Overview</h1> -->
+<section class="section--posts">
   <% articles.forEach(article=>{ %>
   <article class="card">
     <a href="/articles/<%= article._id %>">
@@ -28,8 +28,8 @@
               </div>
             </div>
           </div> -->
-          <h2 class="card__title"><%= article.title %></h2>
-          <p class="card-text"><%= article.description %></p>
+          <h2 class="card__title line-clamp-2"><%= article.title %></h2>
+          <p class="card-text line-clamp-3"><%= article.description %></p>
           <div class="category">
             <label class="tags tags--filled"><%=article.category.title%></label>
           </div>
