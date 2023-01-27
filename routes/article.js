@@ -2,6 +2,7 @@ const express = require("express");
 const Article = require("../models/article");
 const catchAsync = require("../utils/catchAsync");
 const CustomError = require("../utils/cutomError");
+const convertToSlug = require("../utils/convertToSlug")
 const router = express.Router();
 const multer = require("multer");
 const { storage } = require("../cloudinary");
@@ -44,25 +45,28 @@ router.post(
   isLoggedIn,
   upload.single("heroImage"),
   catchAsync(async (req, res) => {
-    console.log(req.body);
     const article = new Article(req.body);
     article.author = req.author._id;
     article.datePublished = new Date().toUTCString().slice(5,16);
+    article.slug = convertToSlug(article.title);
+    article.reads = 0;
     if (req.file) article.heroImage = req.file.path;
-    const { _id: articleId } = await article.save();
+    const { slug } = await article.save();
     req.flash("success","Your article is now Live");
-    res.redirect(`/articles/${articleId}`);
+    res.redirect(`/articles/${slug}`);
   })
 );
 
 router.get(
-  "/:id",
+  "/:slug",
   catchAsync(async (req, res) => {
-    const { id } = req.params;
-    const article = await Article.findById(id)
+    const { slug } = req.params;
+    const article = await Article.findOne({slug})
       .populate("author")
       .populate("category");
     res.render("articles/show", { article });
+    article.reads ++;
+    return await article.save();
   })
 );
 
@@ -87,9 +91,9 @@ router.put(
   catchAsync(async (req, res) => {
     const { id } = req.params;
     req.body.dateLastUpdated = new Date().toUTCString().slice(5,16)
-    await Article.findOneAndUpdate({ _id: id }, req.body);
+    const {slug} = await Article.findOneAndUpdate({ _id: id }, req.body);
     req.flash("success", "Article has been updated SuccessFully");
-    res.redirect(`/articles/${id}`);
+    res.redirect(`/articles/${slug}`);
   })
 );
 

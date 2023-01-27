@@ -16,6 +16,8 @@ const articleSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Category",
   },
+  slug: String,
+  reads: Number,
   heroImage: String,
   content: String,
   datePublished: String,

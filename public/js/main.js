@@ -4,6 +4,7 @@ const navLinks = document.querySelector(".nav__links")
 window.addEventListener("scroll", ()=>{
   toggle.classList.remove("nav__burger--close")
   navLinks.classList.remove("nav__links--expanded")
+  setActiveToc()
 })
 
 toggle.addEventListener("click", ()=>{
@@ -20,7 +21,8 @@ setTimeout(()=>{
   if(flash) flash.style.display = 'none'
 },2000)
 
-// Checking for item Visiblity using async observer
+
+// Checking for item Visiblity using async observer (author-box here)
 
 const author = document.querySelector(".author-box--mobile .author")
 
@@ -35,23 +37,12 @@ var authorBoxObserver = new IntersectionObserver(function(entries) {
 
 authorBoxObserver.observe(document.querySelector("#author-box"));
 
+
+
 // For sidebar functionality
 const headings = document.querySelectorAll("h2,h3");
 const tocLinks = document.querySelectorAll(".toc__content")
 const toc = document.getElementById("toc")
-
-articleHeadingObserver = new IntersectionObserver((entries)=>{
-  console.log(entries)
-  if (entries[0].isIntersecting === true && entries[0].intersectionRatio === 1){
-    tocLinks.forEach(link=>{
-      if(link.dataset.toc === entries[0].target.id){
-        return link.classList.add("toc__content--active")
-      }
-      link.classList.remove("toc__content--active")
-    })
-  }
-},{ threshold: [1]})
-
 
 headings.forEach((heading,index) => {
   heading.setAttribute("id", `heading-${index}`);
@@ -68,6 +59,49 @@ tocLinks.forEach(link=>{
     })
   })
 })
+
+
+// To set active TOC link based on respective heading on scroll
+function setActiveToc() {
+  let activeHeading = null;
+  headings.forEach((heading) => {
+    if (heading.getBoundingClientRect().top < 150 && heading.getBoundingClientRect().top > -150) {
+      activeHeading = heading;
+    }
+  });
+  if (!activeHeading) {
+    return;
+  }
+  const activeLink = toc.querySelector(`[data-toc="${activeHeading.id}"]`);
+  activeLink.classList.add("toc__content--active");
+  // Remove the active class from all other links
+  const tocLinks = toc.querySelectorAll(".toc__content");
+  tocLinks.forEach((link) => {
+    if (link !== activeLink) {
+      link.classList.remove("toc__content--active");
+    }
+  });
+};
+
+// window.addEventListener("scroll", ()=>{
+//   setActiveToc()
+// });
+
+
+// articleHeadingObserver = new IntersectionObserver((entries)=>{
+//   console.log(entries)
+//   if (entries[0].isIntersecting === true && entries[0].intersectionRatio === 1){
+//     tocLinks.forEach(link=>{
+//       if(link.dataset.toc === entries[0].target.id){
+//         return link.classList.add("toc__content--active")
+//       }
+//       link.classList.remove("toc__content--active")
+//     })
+//   }
+// },{ threshold: [1]})
+
+
+
 
 
 

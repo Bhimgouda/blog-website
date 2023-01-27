@@ -18,11 +18,15 @@
     
     <% if(currentAuthor &&
     currentAuthor._id.equals(article.author._id)){ %>
-    <button>
-      <a href="/articles/<%= article._id %>/edit">Edit Article</a>
-    </button>
+    <a href="/articles/<%= article._id %>/edit">
+      <button class="btn">
+        Edit Article
+      </button>
+    </a>
     <% } %>
+
     <div class="article__header">
+      
       <div class="article__bg-image">
         <img src="<%= article.heroImage  %>" alt="" />
       </div>
@@ -30,8 +34,7 @@
         <a
           class="tags tags--filled tags--big"
           href="/categories/<%= article.category._id %>"
-          ><%=article.category.title%></a
-        >
+          ><%=article.category.title%></a>
         <h1 class="article__title"><%= article.title %></h1>
         <span class="article__tagline"><%= article.tagline %></span>
       </div>
@@ -50,6 +53,9 @@
             <%}else{%>
             <p class="publish-date">Published on <%= article.datePublished %></p>
             <%}%>
+            <p>
+              Reads: <%=article.reads%>
+            </p>
           </div>
        </div>
       </div>
@@ -83,16 +89,98 @@
         </sidebar>
 
       </div>
-
-
-
     </article>
 
     <% if(currentAuthor && currentAuthor._id.equals(article.author._id)){ %>
     <form action="/articles/<%= article._id %>?_method=DELETE" method="POST">
-      <button type="submit">DELETE Article</button>
+      <button class="btn" type="submit">DELETE Article</button>
     </form>
     <% } %> <%- include('../partials/footer')%>
-    <script src="/js/main.js"></script>
+
+
+    <script>
+      const toggle = document.querySelector(".nav__burger");
+      const navLinks = document.querySelector(".nav__links")
+
+      window.addEventListener("scroll", ()=>{
+        toggle.classList.remove("nav__burger--close")
+        navLinks.classList.remove("nav__links--expanded")
+        setActiveToc()
+      })
+
+      toggle.addEventListener("click", ()=>{
+        toggle.classList.toggle("nav__burger--close")
+        navLinks.classList.toggle("nav__links--expanded")
+      })
+
+
+      // To dissapear flash after 2-3 seconds
+      const flash = document.querySelector(".flash")
+
+      setTimeout(()=>{
+        if(flash) flash.style.display = 'none'
+      },2000)
+
+      // Checking for item Visiblity using async observer (author-box here)
+
+        const author = document.querySelector(".author-box--mobile .author")
+
+        var authorBoxObserver = new IntersectionObserver(function(entries) {
+          // isIntersecting is true when element and viewport are overlapping
+          // isIntersecting is false when element and viewport don't overlap
+          if(entries[0].isIntersecting === true)
+            if(author){
+              author.classList.add('author--slide-in')
+            }
+        }, { threshold: [1] }); // 0 for entry and 11 for full visible
+
+        authorBoxObserver.observe(document.querySelector("#author-box"));
+
+
+
+        // For sidebar functionality
+        const headings = document.querySelectorAll("h2,h3");
+        const tocLinks = document.querySelectorAll(".toc__content")
+        const toc = document.getElementById("toc")
+
+        headings.forEach((heading,index) => {
+          heading.setAttribute("id", `heading-${index}`);
+          // articleHeadingObserver.observe(heading)
+        });
+
+        tocLinks.forEach(link=>{
+          link.addEventListener("click", (e)=>{
+            e.target.dataset.toc
+            headings.forEach(heading=>{
+              if(e.target.dataset.toc === heading.id){
+                return heading.scrollIntoView({behavior: "smooth"})
+              }
+            })
+          })
+        })
+
+
+      // To set active TOC link based on respective heading on scroll
+      function setActiveToc() {
+        let activeHeading = null;
+        headings.forEach((heading) => {
+          if (heading.getBoundingClientRect().top < 150 && heading.getBoundingClientRect().top > -150) {
+            activeHeading = heading;
+          }
+        });
+        if (!activeHeading) {
+          return;
+        }
+        const activeLink = toc.querySelector(`[data-toc="${activeHeading.id}"]`);
+        activeLink.classList.add("toc__content--active");
+        // Remove the active class from all other links
+        const tocLinks = toc.querySelectorAll(".toc__content");
+        tocLinks.forEach((link) => {
+          if (link !== activeLink) {
+            link.classList.remove("toc__content--active");
+          }
+        });
+      };  
+    </script>
   </body>
 </html>

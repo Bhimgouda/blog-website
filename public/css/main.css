@@ -187,12 +187,12 @@ a{
 
 .section--posts{
     justify-items: center;
-    margin: auto;
     width: 90vw;
     display: grid;
     align-items: center;
     justify-items: center;
-    row-gap: 40px;
+    row-gap: 70px;
+    margin: 100px auto;
 }
 
 @media screen and (min-width:760px) {
@@ -548,7 +548,7 @@ a{
     }
 
     .author img{
-        margin-top: 200px;
+        margin-top: 150px;
     }
 
     .author__name{

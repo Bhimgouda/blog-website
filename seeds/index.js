@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const Article = require("../models/article");
 const Category = require("../models/category");
 const Author = require("../models/author");
+const convertToSlug = require("../utils/convertToSlug")
 
 const dbUrl = process.env.MONGODB_URI || "mongodb://localhost:27017/blog-website";
 
@@ -12,9 +13,12 @@ mongoose
   .catch((e) => console.log(e));
 
 const seedDB = async () => {
-  await Article.deleteMany({});
-  await Author.deleteMany({});
-  await Category.deleteMany({});
+
+
+//  await Article.insertMany(articles)
+  // await Article.deleteMany({});
+  // await Author.deleteMany({});
+  // await Category.deleteMany({});
 
   // const author = new Author({
   //   name: "Pragat Vyawahare",
@@ -25,13 +29,13 @@ const seedDB = async () => {
   
   // const { _id: authorId } = await author.save();
 
-  const category = new Category({
-    title: "web3",
-    description: "All articles and guides related to web3",
-    articles: [],
-  });
+  // const category = new Category({
+  //   title: "web3",
+  //   description: "All articles and guides related to web3",
+  //   articles: [],
+  // });
 
-  const { _id: categoryId } = await category.save();
+  // const { _id: categoryId } = await category.save();
 
   // const heroImages = [
   //   "https://miro.medium.com/max/828/0*19YkNq6MZsxRY60I",

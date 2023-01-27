@@ -12,6 +12,30 @@
     <%- include('../partials/navbar')%> 
     <%- body -%> <%-
     include('../partials/footer')%>
-    <script src="/js/main.js"></script>
+
+    <script>
+        const toggle = document.querySelector(".nav__burger");
+        const navLinks = document.querySelector(".nav__links")
+
+        window.addEventListener("scroll", ()=>{
+          toggle.classList.remove("nav__burger--close")
+          navLinks.classList.remove("nav__links--expanded")
+        })
+
+        toggle.addEventListener("click", ()=>{
+          toggle.classList.toggle("nav__burger--close")
+          navLinks.classList.toggle("nav__links--expanded")
+        })
+
+
+        // To dissapear flash after 2-3 seconds
+
+        const flash = document.querySelector(".flash")
+
+        setTimeout(()=>{
+          if(flash) flash.style.display = 'none'
+        },2000)
+    </script>
+    
   </body>
 </html>
