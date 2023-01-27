@@ -14,10 +14,10 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
 // ----------------Authorization middleware-----------------//
 
 exports.isAuthor = catchAsync(async (req, res, next) => {
-  const { id } = req.params;
-  const article = await Article.findById(id);
+  const { slug } = req.params;
+  const article = await Article.findOne({slug});
   if (!article.author.equals(req.author._id)) {
-    return res.redirect(`/articles/${id}`);
+    return res.redirect(`/articles/${slug}`);
   }
   next();
 });

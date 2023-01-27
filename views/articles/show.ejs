@@ -4,8 +4,9 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= article.title %></title>
-    <meta name="description" content="<%= article.description %> " />
+    <title><%= article.seoTitle %></title>
+    <meta name="description" content="<%= article.description %>" />
+    <meta name="keywords" content="<%= article.keywords %>" />
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,7 +19,7 @@
     
     <% if(currentAuthor &&
     currentAuthor._id.equals(article.author._id)){ %>
-    <a href="/articles/<%= article._id %>/edit">
+    <a href="/articles/<%= article.slug %>/edit">
       <button class="btn">
         Edit Article
       </button>
@@ -44,7 +45,7 @@
 
       <div class="author-box--desktop">
         <div class="author sticky-container">
-          <img src="https://media.licdn.com/dms/image/D4D03AQHd6LmaX_AL-g/profile-displayphoto-shrink_400_400/0/1673347814750?e=1680134400&v=beta&t=amDenRkzAQirxXdvIpikH3PGsrXDieGommkK7QNj4Ak" alt="">
+          <img src="/images/pragat.jpg" alt="">
           <div class="author__info">
             <p class="author__name"><%=article.author.name%></p>
             <span class="author__about line-clamp-2">Blockchain, Crypto and Web 3 writer. Connect with me if you are looking to elevate your content game.</span>
@@ -92,7 +93,7 @@
     </article>
 
     <% if(currentAuthor && currentAuthor._id.equals(article.author._id)){ %>
-    <form action="/articles/<%= article._id %>?_method=DELETE" method="POST">
+    <form action="/articles/<%= article.slug %>?_method=DELETE" method="POST">
       <button class="btn" type="submit">DELETE Article</button>
     </form>
     <% } %> <%- include('../partials/footer')%>

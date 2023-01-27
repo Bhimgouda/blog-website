@@ -5,8 +5,9 @@ const { Schema } = mongoose;
 
 const articleSchema = new Schema({
   title: String,
+  seoTitle: String,
   description: String,
-  keywords: String, // May be I have to change this to a string
+  keywords: String, 
   tagline: String,
   author: {
     type: Schema.Types.ObjectId,

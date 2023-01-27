@@ -100,10 +100,53 @@ quill.on(Quill.events.EDITOR_CHANGE, function(eventType, range) {
 
 
 
+// For description Validation
+const description = document.getElementById("description")
+const descriptionCount = document.querySelector(`[data-for="description"] span`)
+const descriptionClass =  document.querySelector(`[data-for="description"]`).classList
+if(descriptionCount.textContent >= 120 && descriptionCount.textContent <= 150) descriptionClass.add("valid")
 
+validateInputChar(description, descriptionCount, 120, 150, descriptionClass)
+
+// For TagLine Validation
+const tagline = document.getElementById('tagline');
+const taglineCount = document.querySelector(`[data-for="tagline"] span` )
+const taglineClass =  document.querySelector(`[data-for="tagline"]`).classList
+if(taglineCount.textContent >= 40 && taglineCount.textContent <= 60) taglineClass.add("valid")
+
+validateInputChar(tagline, taglineCount, 40, 60, taglineClass)
+
+// For SEO title Validation
+const seoTitle = document.getElementById('seoTitle');
+const seoTitleCount = document.querySelector(`[data-for="seoTitle"] span` )
+const seoTitleClass =  document.querySelector(`[data-for="seoTitle"]`).classList
+if(seoTitleCount.textContent >= 45 && seoTitleCount.textContent <= 65) seoTitleClass.add("valid")
+
+validateInputChar(seoTitle, seoTitleCount, 45, 65, seoTitleClass)
+
+function validateInputChar(inputElement, countDisplay, min, max,  classElement){
+ inputElement.addEventListener("input", (e)=>{
+    const charCount = e.target.value.length;
+    countDisplay.textContent = charCount;
+    if(classElement){
+      if(charCount>=min && charCount<=max) return classElement.add('valid')
+      return classElement.remove("valid")
+    }
+  })
+}
+
+const heroImage = document.getElementById('heroImage');
+const heroImageClass = document.querySelector(`[data-for="heroImage"]`)
+
+heroImage.addEventListener("input", ()=>{
+  if(heroImageClass){
+    if(heroImage.files.length) heroImageClass.classList.add("valid")
+  }
+})
 
 var form = document.querySelector("form");
 form.onsubmit = function (e) {
+
   // Populate hidden form on submit
   // to get the title and content seperately from the editor container
   var content = document.querySelector("input[name=content]");
@@ -112,6 +155,17 @@ form.onsubmit = function (e) {
   const endIndex = quill.root.innerHTML.indexOf('</h1>')+5
   title.value = quill.root.innerHTML.slice(startIndex+4,endIndex-5)
   content.value = quill.root.innerHTML.slice(endIndex)
+
+  if(heroImageClass){ // for new article and edit
+    if(!(descriptionClass.contains("valid") && taglineClass.contains("valid") && seoTitleClass.contains("valid") && heroImageClass.contains("valid") )){
+      e.preventDefault()
+    }
+  }
+  else{ // only for edit article
+    if(!(descriptionClass.contains("valid") && taglineClass.contains("valid") && seoTitleClass.contains("valid"))){
+      e.preventDefault()
+    }
+  }
 };
 
 
@@ -265,8 +319,30 @@ function insertToEditor(url) {
   $('#sidebar-controls').hide();
 }
 
+
+
+
+
+
+
+
+
+
+
 // quill editor add image handler
 // quill.getModule("toolbar").addHandler("image", () => {
 //   selectLocalImage();
 // });
+
+
+
+// Client side validation values
+
+// Description should be 120+
+// less than 150
+
+// Title length 40+
+// better if less than 70
+
+// tagline 40 - 60
 

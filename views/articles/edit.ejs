@@ -25,7 +25,7 @@
     <%- include('../partials/navbar')%>
     <form
       method="POST"
-      action="/articles/<%= article._id %>?_method=PUT"
+      action="/articles/<%= article.slug %>?_method=PUT"
       enctype="multipart/form-data"
     >
     
@@ -56,16 +56,25 @@
       <div class="seo-inputs ">
         <h2 class="seo-heading">Edit These</h2>
       <div>
-        <input type="hidden" type="text" name="title" placeholder="title" />
+        <input type="hidden" readonly type="text" name="title" placeholder="title" />
+      </div>
+
+      <div>
+        <label class="label" for="seoTitle">Edit SEO-Title*</label>
+        <input id="seoTitle" type="text" value="<%= article.seoTitle %>" name="seoTitle" placeholder="SEO-title" />
+        <span data-for="seoTitle" class="invalid">char:<span><%= article.seoTitle.length %></span> (from 45 to 65 char)</span>
       </div>
   
       <div>
         <label class="label" for="description">Edit Description*</label>
         <textarea id="description" rows="3" type="text" name="description" placeholder="Description" ><%= article.description %></textarea>
+        <span data-for="description" class="invalid">char:<span><%=article.description.length %></span> (from 120 to 150 char)</span>
       </div>
+
         <div>
           <label class="label" for="tagline">Edit Tagline*</label>
           <input id="tagline" value="<%=article.tagline%>" type="text" name="tagline" placeholder="Tagline" />
+          <span data-for="tagline" class="invalid">char:<span><%=article.tagline.length%></span> (from 40 to 60 char)</span>
         </div>
 
         
@@ -79,6 +88,7 @@
           <label class="label" for="heroImage">Change Hero-Image*</label>
           <input type="file" name="heroImage" id="heroImage" placeholder="Add Image Link" />
         </div>
+
         </div>
       <button class="btn--publish" type="submit">Update Now</button>
     </form>

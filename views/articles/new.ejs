@@ -51,21 +51,34 @@
       <!-- Meta deta And SEO inputs -->
       <div class="seo-inputs ">
         <h2 class="seo-heading">Fill It Up If you aspire to rank on GOOGLE</h2>
+
+        <!-- This one is hidden for a reason and this takes the article title to servers don't touch unless required -->
         <div>
           <input type="hidden" type="text" name="title" placeholder="title" />
         </div>
+        
+        <div>
+          <input type="text" id="seoTitle" name="seoTitle" placeholder="SEO-title" />
+          <span data-for="seoTitle" class="invalid">char:<span>0</span> (from 45 to 65 char)</span>
+        </div>
+
         <div>
           <!-- <label class="label" for="description">Add A Description*</label> -->
           <textarea rows="3" id="description" type="text" name="description" placeholder="Description" ></textarea>
+          <span data-for="description" class="invalid">char:<span>0</span> (from 120 to 150 char)</span>
         </div>
+
         <div>
           <!-- <label class="label" for="tagline">Add a Tagline*</label> -->
           <input id="tagline" type="text" name="tagline" placeholder="Tagline" />
+          <span data-for="tagline" class="invalid">char:<span>0</span> (from 40 to 60 char)</span>
         </div>
+
         <div>
           <!-- <label class="label" for="keywords">Add a Few Keywords*</label> -->
-          <input id="keywords" type="text" name="keywords" placeholder="Add keywords" />
+          <input id="keywords" type="text" name="keywords" placeholder="Add keywords like this nft,defi,web3" />
         </div>
+
         <div>
           <!-- <label class="label" for="category">Choose A Category*</label> -->
           <select name="category" id="category">
@@ -74,10 +87,13 @@
             <% } %>
           </select>
         </div>
+
         <div>
           <!-- <label class="label" for="heroImage">Add A Hero-Image*</label> -->
           <input type="file" name="heroImage" id="heroImage" placeholder="Add Image Link" />
+          <span data-for="heroImage" class="invalid">Choose a img file</span>
         </div>
+
       </div>
       <button class="btn--publish" type="submit">Publish</button>
     </form>

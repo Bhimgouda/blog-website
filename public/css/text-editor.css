@@ -235,3 +235,14 @@
     margin-left: 10px;
   }
 }
+
+/* Form Validators */
+
+.invalid{
+  color: rgb(255, 54, 54);
+  font-size: 1.4rem;
+}
+
+.valid{
+  color: rgb(0, 255, 0);
+}

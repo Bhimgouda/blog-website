@@ -3,8 +3,8 @@
 <!-- <h1 class="index-heading">An Overview</h1> -->
 
 <section class="section--posts">
-  <% articles.forEach(article=>{ %>
-  <article class="card">
+  <% articles.forEach((article, index)=>{ %>
+  <article class="card <%= (index + 1) % 5 === 0 && "take-2-columns" %> ">
     <a href="/articles/<%= article.slug %>">
       <section class="card__header">
         <img
