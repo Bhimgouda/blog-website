@@ -36,7 +36,7 @@ class HeaderBlot extends Block {
   }
 }
 HeaderBlot.blotName = 'header';
-HeaderBlot.tagName = ['H1', 'H2',"H3"];
+HeaderBlot.tagName = ['H2',"H3"];
 
 class DividerBlot extends BlockEmbed { }
 DividerBlot.blotName = 'divider';
@@ -98,7 +98,13 @@ quill.on(Quill.events.EDITOR_CHANGE, function(eventType, range) {
   }
 });
 
+// For Title Validation
+const title = document.getElementById("title")
+const titleCount = document.querySelector(`[data-for="title"] span`)
+const titleClass =  document.querySelector(`[data-for="title"]`).classList
+if(titleCount.textContent >= 25 && titleCount.textContent <= 70) titleClass.add("valid")
 
+validateInputChar(title, titleCount, 25, 70, titleClass)
 
 // For description Validation
 const description = document.getElementById("description")
@@ -120,9 +126,9 @@ validateInputChar(tagline, taglineCount, 40, 60, taglineClass)
 const seoTitle = document.getElementById('seoTitle');
 const seoTitleCount = document.querySelector(`[data-for="seoTitle"] span` )
 const seoTitleClass =  document.querySelector(`[data-for="seoTitle"]`).classList
-if(seoTitleCount.textContent >= 45 && seoTitleCount.textContent <= 65) seoTitleClass.add("valid")
+if(seoTitleCount.textContent >= 40 && seoTitleCount.textContent <= 60) seoTitleClass.add("valid")
 
-validateInputChar(seoTitle, seoTitleCount, 45, 65, seoTitleClass)
+validateInputChar(seoTitle, seoTitleCount, 40, 60, seoTitleClass)
 
 function validateInputChar(inputElement, countDisplay, min, max,  classElement){
  inputElement.addEventListener("input", (e)=>{
@@ -135,6 +141,22 @@ function validateInputChar(inputElement, countDisplay, min, max,  classElement){
   })
 }
 
+// For keyword Validation
+const keywords = document.getElementById("keywords")
+const keywordsCount = document.querySelector(`[data-for="keywords"] span`)
+const keywordsClass =  document.querySelector(`[data-for="keywords"]`).classList
+
+if(keywordsCount.textContent >= 2 && keywordsCount.textContent <= 5) keywordsClass.add("valid");
+
+keywords.addEventListener("input", (e)=>{
+  const keywords = e.target.value.split(",").length
+  keywordsCount.textContent = keywords
+  if(keywords>=2 && keywords <=5) keywordsClass.add("valid")
+  else keywordsClass.remove("valid")
+})
+
+
+// For Hero Image Validation
 const heroImage = document.getElementById('heroImage');
 const heroImageClass = document.querySelector(`[data-for="heroImage"]`)
 
@@ -150,19 +172,15 @@ form.onsubmit = function (e) {
   // Populate hidden form on submit
   // to get the title and content seperately from the editor container
   var content = document.querySelector("input[name=content]");
-  var title = document.querySelector("input[name=title]")
-  const startIndex = quill.root.innerHTML.indexOf("<h1>");
-  const endIndex = quill.root.innerHTML.indexOf('</h1>')+5
-  title.value = quill.root.innerHTML.slice(startIndex+4,endIndex-5)
-  content.value = quill.root.innerHTML.slice(endIndex)
+  content.value = quill.root.innerHTML
 
   if(heroImageClass){ // for new article and edit
-    if(!(descriptionClass.contains("valid") && taglineClass.contains("valid") && seoTitleClass.contains("valid") && heroImageClass.contains("valid") )){
+    if(!(descriptionClass.contains("valid") && taglineClass.contains("valid") && titleClass.contains("valid") && seoTitleClass.contains("valid") && keywordsClass.contains("valid") && heroImageClass.classList.contains("valid") )){
       e.preventDefault()
     }
   }
   else{ // only for edit article
-    if(!(descriptionClass.contains("valid") && taglineClass.contains("valid") && seoTitleClass.contains("valid"))){
+    if(!(descriptionClass.contains("valid") && taglineClass.contains("valid") && titleClass.contains("valid") && keywordsClass.contains("valid") && seoTitleClass.contains("valid"))){
       e.preventDefault()
     }
   }
@@ -208,7 +226,20 @@ document.querySelector("#link").addEventListener("click",function(e){
 })
 
 
-document.querySelector("#header-1").addEventListener("click",function(e){
+// document.querySelector("#header-1").addEventListener("click",function(e){
+// e.preventDefault();
+// document.querySelectorAll("#tooltip-controls button").forEach(btn=>{
+//   if(btn.id !== this.id)
+//   btn.classList.remove("active")
+// })
+//   this.classList.toggle("active")
+//   if(this.classList.contains("active"))
+//   quill.format('header', 1);
+//   else  quill.format("header", false);
+// })
+
+
+document.querySelector("#header-2").addEventListener("click",function(e){
 e.preventDefault();
 document.querySelectorAll("#tooltip-controls button").forEach(btn=>{
   if(btn.id !== this.id)
@@ -220,18 +251,6 @@ document.querySelectorAll("#tooltip-controls button").forEach(btn=>{
   else  quill.format("header", false);
 })
 
-document.querySelector("#header-2").addEventListener("click",function(e){
-e.preventDefault();
-document.querySelectorAll("#tooltip-controls button").forEach(btn=>{
-  if(btn.id !== this.id)
-  btn.classList.remove("active")
-})
-  this.classList.toggle("active")
-  if(this.classList.contains("active"))
-  quill.format('header', 2);
-  else  quill.format("header", false);
-})
-
 document.querySelector("#header-3").addEventListener("click",function(e){
   e.preventDefault()
   document.querySelectorAll("#tooltip-controls button").forEach(btn=>{
@@ -240,7 +259,7 @@ document.querySelector("#header-3").addEventListener("click",function(e){
 })
   this.classList.toggle("active")
   if(this.classList.contains("active"))
-  quill.format('header', 3);
+  quill.format('header', 2);
   else  quill.format("header", false);
 })
 

@@ -7,6 +7,7 @@
   font-style: normal;
 }
 
+/* Medium style */
 @font-face {
   font-family: 'PT-serif';
   src: url('/fonts/ptserif-regular-webfont.woff2') format('woff2'),
@@ -15,9 +16,29 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Satoshi-Medium';
+  src: url('/fonts/Satoshi-Medium.woff2') format('woff2'),
+       url('/fonts/Satoshi-Medium.woff') format('woff');
+       font-weight: 400;
+       font-display: swap;
+       font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi-Black';
+  src: url('/fonts/Satoshi-Black.woff2') format('woff2'),
+       url('/fonts/Satoshi-Black.woff') format('woff');
+       font-weight: 900;
+       font-display: swap;
+       font-style: normal;
+}
+
 :root{
   --font-poppins:  'Poppins', sans-serif;
   --font-pt-serif:  'PT-serif', sans-serif;
+  --font-satoshi-regular: 'Satoshi-Medium', sans-serif;
+  --font-Satoshi-Black:  'Satoshi-Black', sans-serif;
 }
 
 /* #editor-container{
@@ -40,17 +61,38 @@
   }
   
   #editor-container {
-    font-size: 2rem;
+    font-size: 1.6rem;
     margin: 0 auto;
     max-width: 950px;
     min-height: 120vh;
     background-color: white;
-    color: rgba(34, 34, 34, 0.84);
-    font-family: var(--font-pt-serif);
+    color: #495057;
+    
+    /* Medium Style */
+    /* color: rgba(34, 34, 34, 0.84); */ 
+    /* font-family: var(--font-pt-serif); */
+
+    font-family: var(--font-satoshi-regular);
     text-align: left;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+
+  #editor-container h2, #editor-container h3{
+    color: black;
+    font-family: var(--font-Satoshi-Black);
+    font-family: var(--font-pt-serif);
+    /* Need to remove for medium style */
+  }
+
+  #editor-container h2{
+    font-size: 34px;
+  }
+
+  #editor-container h3{
+    font-size: 28px;
+  }
+  
 
   .seo-heading{
     text-align: center;
@@ -61,10 +103,10 @@
   }
   
   .seo-inputs{
+    transform: translateY(-50px);
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-family: var(--font-poppins);
   }
 
   .seo-inputs div{
@@ -221,11 +263,15 @@
   }
 
   #editor-container{
+    font-size: 1.8rem;
     margin: 50px auto;
-        padding: 50px 100px;  
-        border: none;
-        border-radius: 20px;
+    padding: 50px 100px;  
+    border: none;
+    border-radius: 20px;
   }
+
+
+
   .seo-inputs{
     align-items: flex-start;
   }

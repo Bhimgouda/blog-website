@@ -10,10 +10,6 @@
       rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans%3A300,400,600,700"
-      rel="stylesheet"
-    />
-    <link
       href="https://cdn.quilljs.com/1.0.0/quill.snow.css"
       rel="stylesheet"
     />
@@ -26,12 +22,18 @@
 
     <form method="POST" action="/articles" enctype="multipart/form-data">
 
+      <div class="article__header article__header--text-editor">
+        <div class="article__info">
+          <input class="article__title" type="text" id="title" name="title" placeholder="Title goes here..." /><br>
+          <span data-for="title" class="invalid">char:<span>0</span> (from 25 to 70 char)</span>
+        </div>
+      </div>
+
       <!-- Create the editor container -->
       <div id="tooltip-controls">
         <button class="tooltip-1" id="bold"><i class="fa fa-bold"></i></button>
         <button class="tooltip-1" id="italic"><i class="fa fa-italic"></i></button>
         <button class="tooltip-1" id="link"><i class="fa fa-link"></i></button>
-        <button class="tooltip-2" id="header-1"><i class="fa fa-header"><sub>1</sub></i></button>
         <button class="tooltip-2" id="header-2"><i class="fa fa-header"><sub>2</sub></i></button>
         <button class="tooltip-2" id="header-3"><i class="fa fa-header"><sub>3</sub></i></button>
         <button class="tooltip-2" id="blockquote"><i class="fa fa-quote-right"></i></button>
@@ -44,22 +46,16 @@
       </div>
       <input name="content" type="hidden" />
       <div id="editor-container">
-        <h1>Title...</h1>
         <p>Tell your story...</p>
       </div>
 
       <!-- Meta deta And SEO inputs -->
       <div class="seo-inputs ">
         <h2 class="seo-heading">Fill It Up If you aspire to rank on GOOGLE</h2>
-
-        <!-- This one is hidden for a reason and this takes the article title to servers don't touch unless required -->
-        <div>
-          <input type="hidden" type="text" name="title" placeholder="title" />
-        </div>
         
         <div>
           <input type="text" id="seoTitle" name="seoTitle" placeholder="SEO-title" />
-          <span data-for="seoTitle" class="invalid">char:<span>0</span> (from 45 to 65 char)</span>
+          <span data-for="seoTitle" class="invalid">char:<span>0</span> (from 40 to 60 char)</span>
         </div>
 
         <div>
@@ -77,6 +73,7 @@
         <div>
           <!-- <label class="label" for="keywords">Add a Few Keywords*</label> -->
           <input id="keywords" type="text" name="keywords" placeholder="Add keywords like this nft,defi,web3" />
+          <span data-for="keywords" class="invalid">keywords added: <span>0</span> (Add from 2 to 5 kewyords)</span>
         </div>
 
         <div>
@@ -95,7 +92,7 @@
         </div>
 
       </div>
-      <button class="btn--publish" type="submit">Publish</button>
+      <button class="btn btn--publish btn--filled" type="submit">Publish</button>
     </form>
     <!-- Include the Quill library -->
 
@@ -105,5 +102,29 @@
     <script src="https://platform.twitter.com/widgets.js"></script>
     <script src="//cdn.quilljs.com/latest/quill.min.js"></script>
     <script src="/js/text-editor.js"></script>
+
+    <script>
+      const toggle = document.querySelector(".nav__burger");
+      const navLinks = document.querySelector(".nav__links")
+
+      window.addEventListener("scroll", ()=>{
+        toggle.classList.remove("nav__burger--close")
+        navLinks.classList.remove("nav__links--expanded")
+      })
+
+      toggle.addEventListener("click", ()=>{
+        toggle.classList.toggle("nav__burger--close")
+        navLinks.classList.toggle("nav__links--expanded")
+      })
+
+
+      // To dissapear flash after 2-3 seconds
+
+      const flash = document.querySelector(".flash")
+
+      setTimeout(()=>{
+        if(flash) flash.style.display = 'none'
+      },2000)
+  </script>
   </body>
 </html>

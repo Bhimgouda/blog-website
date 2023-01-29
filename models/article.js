@@ -19,6 +19,7 @@ const articleSchema = new Schema({
   },
   slug: String,
   reads: Number,
+  likes: Number,
   heroImage: String,
   content: String,
   datePublished: String,

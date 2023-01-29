@@ -13,7 +13,6 @@ const Author = require("./models/author");
 const categoryRouter = require("./routes/category");
 const flash = require("connect-flash")
 const MongoStore = require("connect-mongo");
-const CustomError = require("./utils/cutomError");
 
 const dbUrl = process.env.MONGODB_URI || "mongodb://localhost:27017/blog-website";
 

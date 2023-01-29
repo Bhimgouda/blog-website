@@ -8,9 +8,6 @@
     <meta name="description" content="<%= article.description %>" />
     <meta name="keywords" content="<%= article.keywords %>" />
     <link rel="stylesheet" href="/css/main.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap" rel="stylesheet">
   </head>
   <body>
     
@@ -20,7 +17,7 @@
     <% if(currentAuthor &&
     currentAuthor._id.equals(article.author._id)){ %>
     <a href="/articles/<%= article.slug %>/edit">
-      <button class="btn">
+      <button style="border-radius: 0; border: none;" class="btn btn--filled">
         Edit Article
       </button>
     </a>
@@ -45,7 +42,7 @@
 
       <div class="author-box--desktop">
         <div class="author sticky-container">
-          <img src="/images/pragat.jpg" alt="">
+          <img class="author__image" src="/images/pragat.jpg" alt="">
           <div class="author__info">
             <p class="author__name"><%=article.author.name%></p>
             <span class="author__about line-clamp-2">Blockchain, Crypto and Web 3 writer. Connect with me if you are looking to elevate your content game.</span>
@@ -54,9 +51,16 @@
             <%}else{%>
             <p class="publish-date">Published on <%= article.datePublished %></p>
             <%}%>
-            <p>
-              Reads: <%=article.reads%>
-            </p>
+            <div class="views-and-likes">
+              <span class="views">
+              Reads: <span id="views-count"><%=article.reads%></span>
+              </span>
+              <div class="likes">
+                <img style="width: 20px;" src="/images/heart-svgrepo-com.svg" alt="">
+                <span>Like</span>
+                <span id="likes-count"><%= article.likes %></span>
+              </div>
+    </div>
           </div>
        </div>
       </div>
@@ -71,7 +75,7 @@
           
           <div id="author-box" class="author-box--mobile">
             <div class="author">
-              <img src="https://media.licdn.com/dms/image/D4D03AQHd6LmaX_AL-g/profile-displayphoto-shrink_400_400/0/1673347814750?e=1680134400&v=beta&t=amDenRkzAQirxXdvIpikH3PGsrXDieGommkK7QNj4Ak" alt="">
+              <img class="author__image" src="https://media.licdn.com/dms/image/D4D03AQHd6LmaX_AL-g/profile-displayphoto-shrink_400_400/0/1673347814750?e=1680134400&v=beta&t=amDenRkzAQirxXdvIpikH3PGsrXDieGommkK7QNj4Ak" alt="">
               <div class="author__info">
                 <% if(article.dateLastUpdated){ %>
                 <p class="publish-date"> Updated on <%= article.dateLastUpdated %>
@@ -92,11 +96,18 @@
       </div>
     </article>
 
-    <% if(currentAuthor && currentAuthor._id.equals(article.author._id)){ %>
-    <form action="/articles/<%= article.slug %>?_method=DELETE" method="POST">
-      <button class="btn" type="submit">DELETE Article</button>
-    </form>
-    <% } %> <%- include('../partials/footer')%>
+    <div class="views-and-likes views-and-likes--mobile">
+              <span class="views">
+              Reads: <span id="views-count"><%=article.reads%></span>
+              </span>
+              <div class="likes">
+                <img style="width: 20px;" src="/images/heart-svgrepo-com.svg" alt="">
+                <span>Like</span>
+                <span id="likes-count"><%= article.likes %></span>
+              </div>
+    </div>
+    
+    <%- include('../partials/footer')%>
 
 
     <script>
@@ -124,9 +135,9 @@
 
       // Checking for item Visiblity using async observer (author-box here)
 
-        const author = document.querySelector(".author-box--mobile .author")
+      const author = document.querySelector(".author-box--mobile .author")
 
-        var authorBoxObserver = new IntersectionObserver(function(entries) {
+      var authorBoxObserver = new IntersectionObserver(function(entries) {
           // isIntersecting is true when element and viewport are overlapping
           // isIntersecting is false when element and viewport don't overlap
           if(entries[0].isIntersecting === true)
@@ -137,9 +148,31 @@
 
         authorBoxObserver.observe(document.querySelector("#author-box"));
 
+      // For Like Button
+      const likeBtn = document.querySelector(".likes")
+      const likeCount = document.getElementById('likes-count')
+      let liked = JSON.parse('<%= liked %>')
 
+      // For initial state when the page loads 
+      if(liked) likeBtn.style.backgroundColor = 'red';
 
-        // For sidebar functionality
+      likeBtn.addEventListener("click", handleLikeClick)
+      async function handleLikeClick(e){
+        if(liked){
+          likeBtn.style.backgroundColor = 'black'
+          likeCount.textContent --;
+          liked = false
+        }
+        else{
+          likeBtn.style.backgroundColor = 'red'
+          likeCount.textContent ++;
+          liked = true;
+        }
+        // To change the data in db
+        await fetch(`/articles/<%= article.slug %>/like`)
+      }
+
+      // For sidebar functionality
         const headings = document.querySelectorAll("h2,h3");
         const tocLinks = document.querySelectorAll(".toc__content")
         const toc = document.getElementById("toc")

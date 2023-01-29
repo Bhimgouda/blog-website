@@ -55,6 +55,7 @@ router.get(
   catchAsync(async (req, res) => {
     const { id } = req.params;
     const author = await Author.findById(id).populate("articles");
+    author.password = null;
     res.render("author/about", { author });
   })
 );

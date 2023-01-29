@@ -353,29 +353,29 @@
 /* ----------------------------------------- MAIN CSS STARTS HERE --------------------------------------------- */
 
 /* Importing Fonts */
-
 @font-face {
     font-family: 'Poppins';
     src: url('/fonts/poppins-regular-webfont.woff2') format('woff2'),
          url('/fonts/poppins-regular-webfont.woff') format('woff');
     font-weight: 400;
+    font-display: swap;
     font-style: normal;
 }
-
-@font-face {
-    font-family: 'Inter-bold';
-    src: url('/fonts/inter-bold-webfont.woff2') format('woff2'),
-         url('/fonts/inter-bold-webfont.woff') format('woff');
-    font-weight: 700;
-    font-style: normal;
-}
-
 
 @font-face {
     font-family: 'Satoshi-Medium';
     src: url('/fonts/Satoshi-Medium.woff2') format('woff2'),
          url('/fonts/Satoshi-Medium.woff') format('woff');
-         font-weight: 500;
+         font-weight: 400;
+         font-display: swap;
+         font-style: normal;
+}
+
+@font-face {
+    font-family: 'Satoshi-Black';
+    src: url('/fonts/Satoshi-Black.woff2') format('woff2'),
+         url('/fonts/Satoshi-Black.woff') format('woff');
+         font-weight: 900;
          font-display: swap;
          font-style: normal;
 }
@@ -425,6 +425,7 @@ img{
     --color-main-black : black;
     --color-main-dark-grey:#495057;
     --color-grey:rgb(245 245 245);
+    --color-like-: #cc4896;
 
     /* Grey Shades */
     --bs-gray-dark: #343a40;
@@ -438,27 +439,23 @@ img{
     --bs-gray-800: #343a40;
     --bs-gray-900: #212529;
 
-
     --fs-regular:1.6rem;
     --fs-regular-desktop:1.8rem;
     --fs-nav-links:1.6rem;
 
-    --font-inter-bold : 'Inter-bold', sans-serif;
+    --font-Satoshi-Black:  'Satoshi-Black', sans-serif;
     --font-poppins:  'Poppins', sans-serif;
     --font-satoshi-regular: 'Satoshi-Medium', sans-serif;
+
 }
-
-
 
 body{
     background-color: black;
-    overflow-x: hidden;
     font-weight: var(--fw-light);
     font-size: var(--fs-regular);
     font-family: var(--font-poppins);
     line-height: 1.4;
     color: white;
-
     /* This is to set the footer at the bottom of page when content is less */
     display: flex;
     flex-direction: column;
@@ -543,6 +540,30 @@ a{
     .tags--big{
         font-size: 1.5rem;
     }
+}
+
+/* Inputs */
+
+input, select, textarea{
+    color: #adb5bd;
+    background-color: #0e0e0e;
+    border: none;
+    border-radius: 7px;
+    outline: none;
+    padding: 1rem;
+}
+
+/* Change the white to any color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px #0e0e0e inset !important;
+}
+
+/*Change text in autofill textbox*/
+input:-webkit-autofill{
+    -webkit-text-fill-color: #adb5bd !important;
 }
 
 
@@ -732,14 +753,19 @@ a{
     font-size: 1.65rem;
     line-height: 1.5;
     border-radius: 20px;
-    transform: translateY(-10rem);
+    overflow: hidden;
+    transform: translateY(-100px);
 }
+
+
 
 .article__body{
     width: 100%;
     position: relative;
     background-color: black;
 }
+
+
 
 .article p{
     margin: 0 0 3.2rem;
@@ -754,15 +780,12 @@ a{
 }
 
 .article h2, .article h3{
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-Satoshi-Black);
     line-height: 1.2;
     letter-spacing: -0.5px;
     color: var(--bs-gray-900);
-}
-
-.article h2,.article h3{
     margin-bottom: 1rem;
-}    
+}
 
 .article h2{
     font-size: 2.5rem;
@@ -809,14 +832,15 @@ a{
     position: relative;
     z-index: 10;
     max-width: 1200px;
-    padding: 50px 0 150px;
+    padding: 75px 0 150px;
     margin-left: 20px;
 }
 
 .article__title{
+    font-family: sans-serif;
+    margin-bottom: 50px;
     color: #d9dee9;
     width: 90%;
-    font-family: Inter,sans-serif;
     font-weight: 900;
     letter-spacing: -1px;
     line-height: 45px;
@@ -869,6 +893,10 @@ a{
     .article__info{
         margin: auto;
     }
+
+    .article__body{
+        margin-bottom: 100px;
+    }
 }
 
 /* Author box */
@@ -893,6 +921,7 @@ a{
     color: white;
     transform: translateX(-100vw);
     transition: 0.3s ease-in-out;
+    font-family: var(--font-satoshi-regular);
 }
 
 .author--slide-in{
@@ -900,8 +929,9 @@ a{
 }
 
 .publish-date{
-    font-weight: 700;
+    font-weight: 400;
 }
+
 
 .author__info{
     display: flex;
@@ -914,6 +944,7 @@ a{
     font-size: 2.1rem;
     margin-bottom: 10px;
     font-weight: 700;
+    font-family: var(--font-poppins);
 }
 
 .author__about{
@@ -921,9 +952,46 @@ a{
     font-style: italic;
 }
 
-.author img{
+.author__image{
     width: 125px;
     box-shadow: rgb(194 202 214) 0px 8px, rgb(194 202 214) 0px -8px, rgb(194 202 214) 8px 0px, rgb(194 202 214) -8px 0px;
+}
+
+.views-and-likes{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 20px;
+}
+
+.views-and-likes--mobile{
+    margin-bottom: 100px;
+    font-family: var(--font-satoshi-regular);
+}
+
+@media screen and (min-width: 1440px) {
+    .views-and-likes--mobile{
+        display: none;
+    }
+}
+
+.likes:hover{
+    border: 1px solid #adb5bd;
+}
+
+.likes{
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10px;
+    border: 1px solid #393939;
+    border-radius: 5px;
+}
+
+#likes-count{
+    width: 15px;
 }
 
 
@@ -935,10 +1003,11 @@ a{
         color: var(--bs-gray-500);
         text-align: center;
         transform: translateX(0);
+        margin: 0;
     }
 
-    .author img{
-        margin-top: 40px;
+    .author__image{
+        margin-top: 60px;
     }
 
     .author__name{
@@ -963,7 +1032,9 @@ a{
     }
 
     .publish-date{
+        margin-bottom: 20px;
         color: var(--bs-gray-600);
+        font-weight: 700;
         font-size: 1.4rem;
     }
 }
@@ -972,13 +1043,13 @@ a{
 
 .navbar{
     padding: 0.5 2rem;
-    z-index: 25;
+    z-index: 100;
     background: var(--color-main-black);
     display: flex;
     align-items: center;
     justify-content: space-between;
     font-size: 1.6rem;
-    background: linear-gradient(360deg,var(--color-main-black), var(--color-main-black),var(--color-main-violet));
+    /* background: linear-gradient(360deg, var(--color-main-black), var(--color-main-black),var(--color-main-violet)); */
 }
 
 
@@ -990,6 +1061,8 @@ a{
 .logo-container{
     font-size: 4rem;
     font-weight: 900;
+    line-height: 0.7;
+    padding-left: 1rem;
     color: var(--bs-gray-200);
     background: linear-gradient(90deg,var(--color-main-dark-grey),var(--color-main-violet));
     /* border: 5px solid var(--color-main-dark-grey); */
@@ -1025,7 +1098,7 @@ a{
 
 @media screen and (max-width:900px) {
     .navbar{
-        padding: 0.5rem 2rem;
+        padding: 1.5rem 2rem;
     }
     
     .nav__links{
@@ -1102,14 +1175,72 @@ a{
 /* Footer */
 
 .footer{
-    font-family: var(--font-satoshi-regular);
-    background: linear-gradient(180deg,var(--color-main-black), var(--color-main-black),var(--color-main-violet));
-    color: var(--bs-gray-400);
-    padding: 0.5rem;
-    text-align: center;
-    font-size: 1.4rem;
+    display: grid;
+    background: linear-gradient(180deg,var(--color-main-black), var(--color-main-black), var(--color-main-black),var(--color-main-violet));
+    overflow: hidden;
+    border-top: 1px solid #393939;
+    padding-top: 2rem;
+    font-size: 1.5rem;
     margin-top: auto;
 }
+
+.footer__left{
+    font-family: var(--font-satoshi-regular);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:  0 2rem;
+    line-height: 1.5;
+    color: #6c757d;
+}
+
+.footer__right{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+    padding: 4rem;
+}
+
+.footer__right form{
+    font-family: var(--font-satoshi-regular);
+}
+
+.footer__right input{
+    width: 300px;
+    padding: 1rem;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.footer__right button{
+    border: none;
+    padding: 1rem 5rem;
+    border-radius: 20px;
+}
+
+@media screen and (min-width:900px) {
+    .footer{
+        grid-template-columns: 60% 40%;
+        padding-top: 0;
+    }
+
+    .footer__left{
+        padding: 0 5rem;
+    }
+
+    .footer__right{
+        border-left: 1px solid #393939;
+    }
+}
+
+
+
+
+
+
 
 .sticky-container{
         position: -webkit-sticky;
@@ -1141,7 +1272,7 @@ sidebar{
     }
 
     .toc{
-        padding-top:60px ;
+        padding-top: 70px ;
     }
     
     .toc__heading{
@@ -1178,7 +1309,6 @@ sidebar{
     .article__layout{
         grid-template-columns: 20% 55% 20%;
         column-gap: 2.5%;
-        margin-bottom: 50px;
     }
 
     sidebar{
@@ -1209,16 +1339,13 @@ sidebar{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 200px;
+    margin-top: 150px;
 }
 
 .login input{
     display: block;
     width: 350px;
-    padding: 7px;
-    padding-top: 10px;
     margin-bottom: 10px;
-    border-radius: 5px;
     font-size: 1.5rem;
 }
 
@@ -1228,6 +1355,43 @@ sidebar{
     padding-bottom: 10px;
 }
 
+
+/* TEXT-EDITOR HEADER CSS */
+
+.article__header--text-editor input{
+    outline: none;
+    background-color: inherit;
+    border: none;
+    width: 80vw;
+    text-align: center;
+}
+
+.article__header--text-editor .article__title{
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin-bottom: 0;
+}
+
+#editor-container{
+    transform: translateY(-100px);
+    position: relative;
+    z-index: 20;
+}
+
+.seo-inputs div{
+    font-family: var(--font-satoshi-regular);
+    margin-bottom: 2rem;
+}
+
+
+@media screen and (min-width:800px) {
+    .article__header--text-editor .article__title{
+        font-size: 3rem;
+        font-weight: 800;
+        letter-spacing: -1px;
+    }
+}
 
 
 

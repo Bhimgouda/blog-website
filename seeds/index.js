@@ -14,7 +14,7 @@ mongoose
 
 const seedDB = async () => {
 
-  // await Article.updateMany({}, {seoTitle: "NFT Flaws You Need To Know Before Stepping onto the NFT Bandwagon"});
+  await Article.updateMany({}, {likes: 0});
 
 
 //  await Article.insertMany(articles)
