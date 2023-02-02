@@ -11,10 +11,12 @@ const upload = multer({
   storage,
 });
 
+// .replace is made to change the image width to 700 and type to webp or avif
+
 // --------------- image url generator for images in text-editor ---------//
 router.post("/image-urls", isLoggedIn, upload.single("image"), (req, res) => {
   res.send({
-    url: req.file.path.replace("/upload", "/upload/w_700"),
+    url: req.file.path.replace("/upload", "/upload/w_700,f_auto"),
   });
 });
 
@@ -40,12 +42,14 @@ router.get("/:slug/like", catchAsync(async(req,res)=>{
   res.send() // To send 200 response
 }))
 
+
 router.get(
   "/",
   catchAsync(async (req, res) => {
     const articles = await Article.find()
       .populate("category")
       .populate("author");
+      // Here the article heroImage will be replaced on the client side
     res.render("articles/index", { articles });
   })
 );
@@ -86,7 +90,8 @@ router.get(
     const article = await Article.findOne({slug})
       .populate("author")
       .populate("category");
-
+    console.log(article)
+    article.heroImage = article.heroImage.replace("/upload", "/upload/w_700,f_auto")
     // req.session.liked has an object that has slug:true(liked or not liked as per article and for unique user session)
     res.render("articles/show", { article, liked: req.session.liked && req.session.liked[slug] || false });
     article.reads ++;
@@ -102,11 +107,12 @@ router.get(
   catchAsync(async (req, res) => {
     const { slug } = req.params;
     const article = await Article.findOne({slug});
+    article.heroImage = article.heroImage.replace("/upload", "/upload/w_700,f_auto")
     res.render("articles/edit", { article });
   })
 );
 
-// pending: heroImage is not been updated
+
 router.put(
   "/:slug",
   isLoggedIn,

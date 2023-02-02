@@ -9,12 +9,12 @@
       <section class="card__header">
         <img
           class="articleImg"
-          src="<%= article.heroImage  %> "
+          src="<%= article.heroImage.replace("/upload", "/upload/w_1000,f_auto")  %> "
           alt="{post.title}"
         />
       </section>
       <section class="card__body">
-        <img src="<%= article.heroImage  %>" class="card__bg-image" alt="" />
+        <img src="<%= article.heroImage.replace("/upload", "/upload/w_1000,f_auto")  %>" class="card__bg-image" alt="" />
         <div class="glass-2">
           <!-- <div class="author grid">
             <div class="author__div">

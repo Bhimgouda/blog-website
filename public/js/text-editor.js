@@ -312,7 +312,7 @@ function saveToServer(file) {
   fd.append("image", file);
 
   const xhr = new XMLHttpRequest();
-  xhr.open("POST", "http://localhost:5000/articles/image-urls", true);
+  xhr.open("POST", "/articles/image-urls", true);
   xhr.onload = () => {
     if (xhr.status === 200) {
       // this is callback data: url
