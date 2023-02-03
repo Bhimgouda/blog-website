@@ -954,6 +954,7 @@ input:-webkit-autofill{
 
 .author__image{
     width: 125px;
+    height: 125px;
     box-shadow: rgb(194 202 214) 0px 8px, rgb(194 202 214) 0px -8px, rgb(194 202 214) 8px 0px, rgb(194 202 214) -8px 0px;
 }
 
