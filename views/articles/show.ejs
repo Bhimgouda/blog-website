@@ -7,7 +7,7 @@
     <title><%= article.seoTitle %></title>
     <meta name="description" content="<%= article.description %>" />
     <meta name="keywords" content="<%= article.keywords %>" />
-    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="<%= css %>" />
   </head>
   <body>
     
@@ -26,7 +26,7 @@
     <div class="article__header">
       
       <div class="article__bg-image">
-        <img src="<%= article.heroImage  %>" alt="" />
+        <img loading="lazy" src="<%= article.heroImage  %>" alt="" />
       </div>
       <div class="article__info">
         <a
@@ -42,7 +42,7 @@
 
       <div class="author-box--desktop">
         <div class="author sticky-container">
-          <img class="author__image" src="/images/pragat.webp" alt="">
+          <img loading="lazy" class="author__image" src="/images/pragat.webp" alt="">
           <div class="author__info">
             <p class="author__name"><%=article.author.name%></p>
             <span class="author__about line-clamp-2">Blockchain, Crypto and Web 3 writer. Connect with me if you are looking to elevate your content game.</span>
@@ -56,9 +56,9 @@
               Reads: <span id="views-count"><%=article.reads%></span>
               </span>
               <div class="likes">
-                <img style="width: 20px;" src="/images/heart-svgrepo-com.svg" alt="">
+                <img loading="lazy" style="width: 20px;" src="/images/heart-svgrepo-com.svg" alt="">
                 <span>Like</span>
-                <span id="likes-count"><%= article.likes %></span>
+                <span class="likes-count"><%= article.likes %></span>
               </div>
     </div>
           </div>
@@ -66,16 +66,11 @@
       </div>
 
         <div class="article">
-          <img
-            class="article__heroImage"
-            src="<%= article.heroImage%>"
-            alt=""
-          />
           <%- article.content%>
           
           <div id="author-box" class="author-box--mobile">
             <div class="author">
-              <img class="author__image" src="https://media.licdn.com/dms/image/D4D03AQHd6LmaX_AL-g/profile-displayphoto-shrink_400_400/0/1673347814750?e=1680134400&v=beta&t=amDenRkzAQirxXdvIpikH3PGsrXDieGommkK7QNj4Ak" alt="">
+              <img loading="lazy" class="author__image" src="https://media.licdn.com/dms/image/D4D03AQHd6LmaX_AL-g/profile-displayphoto-shrink_400_400/0/1673347814750?e=1680134400&v=beta&t=amDenRkzAQirxXdvIpikH3PGsrXDieGommkK7QNj4Ak" alt="">
               <div class="author__info">
                 <% if(article.dateLastUpdated){ %>
                 <p class="publish-date"> Updated on <%= article.dateLastUpdated %>
@@ -101,9 +96,9 @@
               Reads: <span id="views-count"><%=article.reads%></span>
               </span>
               <div class="likes">
-                <img style="width: 20px;" src="/images/heart-svgrepo-com.svg" alt="">
+                <img loading="lazy" style="width: 20px;" src="/images/heart-svgrepo-com.svg" alt="">
                 <span>Like</span>
-                <span id="likes-count"><%= article.likes %></span>
+                <span class="likes-count"><%= article.likes %></span>
               </div>
     </div>
     
@@ -148,29 +143,30 @@
 
         authorBoxObserver.observe(document.querySelector("#author-box"));
 
-      // For Like Button
-      const likeBtn = document.querySelector(".likes")
-      const likeCount = document.getElementById('likes-count')
+      // For Like Button There are 2 like btns (for styling purposes) for both mobile and pc 
+      const likeBtns = document.querySelectorAll(".likes")
+      const likeCount = document.querySelectorAll('.likes-count')
       let liked = JSON.parse('<%= liked %>')
 
       // For initial state when the page loads 
-      if(liked) likeBtn.style.backgroundColor = 'red';
-
-      likeBtn.addEventListener("click", handleLikeClick)
-      async function handleLikeClick(e){
-        if(liked){
+      
+      likeBtns.forEach((likeBtn,i)=>{
+        if(liked) likeBtn.style.backgroundColor = 'red';
+        likeBtn.addEventListener("click", async()=>{
+          if(liked){
           likeBtn.style.backgroundColor = 'black'
-          likeCount.textContent --;
+          likeCount[i].textContent --;
           liked = false
         }
         else{
           likeBtn.style.backgroundColor = 'red'
-          likeCount.textContent ++;
+          likeCount[i].textContent ++;
           liked = true;
         }
         // To change the data in db
         await fetch(`/articles/<%= article.slug %>/like`)
-      }
+        })
+      })
 
       // For sidebar functionality
         const headings = document.querySelectorAll("h2,h3");

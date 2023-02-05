@@ -19,7 +19,10 @@ const articleSchema = new Schema({
   },
   slug: String,
   reads: Number,
-  likes: Number,
+  likes: {
+    type: Number,
+    min: 0,
+  },
   heroImage: String,
   content: String,
   datePublished: String,

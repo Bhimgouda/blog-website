@@ -1,4 +1,5 @@
 if (process.env.NODE_ENV !== "production") require("dotenv").config();
+// Not require when hosting digital ocean
 
 const mongoose = require("mongoose");
 const express = require("express");
@@ -14,7 +15,7 @@ const categoryRouter = require("./routes/category");
 const flash = require("connect-flash")
 const MongoStore = require("connect-mongo");
 
-const dbUrl = process.env.MONGODB_URI || "mongodb://localhost:27017/blog-website";
+const dbUrl = process.env.MONGODB_URI;
 
 // ----------------------- MIDDLEWARES ---------------------------//
 
@@ -61,7 +62,6 @@ app.use(session(sessionConfig));
 app.use(flash())
 
 // res.locals and adding req.author to request if the author_id is present
-
 app.use(async (req, res, next) => {
   if (req.session.author_id) {
     const { email, name, _id } = await Author.findById(req.session.author_id);
@@ -72,6 +72,7 @@ app.use(async (req, res, next) => {
   res.locals.error = req.flash("error")
   next();
 });
+
 // ----------------------- App Routes -------------------------------//
 
 app.get("/", (req, res) => {

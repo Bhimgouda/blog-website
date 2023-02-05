@@ -5,25 +5,25 @@ const Author = require("../models/author");
 const catchAsync = require("../utils/catchAsync");
 const CustomError = require("../utils/cutomError");
 
-router.get("/register", (req, res) => {
-  res.render("author/register");
-});
+// router.get("/register", (req, res) => {
+//   res.render("author/register");
+// });
 
-router.post(
-  "/register",
-  catchAsync(async (req, res, next) => {
-    const { password, email, name } = req.body;
-    const registeredAuthor = await Author.findOne({ email });
-    if (registeredAuthor)
-      throw new CustomError("User Already registered, Please Login", 403);
-    const author = new Author({ email, password, name });
-    await author.save();
-    req.session.author_id = author._id;
-    req.flash('success',"You have been successfully registered with Us")
-    const redirectUrl = req.session.returnTo || "/articles";
-    res.redirect(redirectUrl);
-  })
-);
+// router.post(
+//   "/register",
+//   catchAsync(async (req, res, next) => {
+//     const { password, email, name } = req.body;
+//     const registeredAuthor = await Author.findOne({ email });
+//     if (registeredAuthor)
+//       throw new CustomError("User Already registered, Please Login", 403);
+//     const author = new Author({ email, password, name });
+//     await author.save();
+//     req.session.author_id = author._id;
+//     req.flash('success',"You have been successfully registered with Us")
+//     const redirectUrl = req.session.returnTo || "/articles";
+//     res.redirect(redirectUrl);
+//   })
+// );
 
 router.get("/login", (req, res) => {
   res.render("author/login");
@@ -50,14 +50,14 @@ router.get("/logout", (req, res) => {
 
 //------------------------- Author About Page -------------------//
 
-router.get(
-  "/:id",
-  catchAsync(async (req, res) => {
-    const { id } = req.params;
-    const author = await Author.findById(id).populate("articles");
-    author.password = null;
-    res.render("author/about", { author });
-  })
-);
+// router.get(
+//   "/:id",
+//   catchAsync(async (req, res) => {
+//     const { id } = req.params;
+//     const author = await Author.findById(id).populate("articles");
+//     author.password = null;
+//     res.render("author/about", { author });
+//   })
+// );
 
 module.exports = router;

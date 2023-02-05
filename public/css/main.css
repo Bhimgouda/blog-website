@@ -570,11 +570,9 @@ input:-webkit-autofill{
 /* Posts Section */
 
 .section--posts{
-    justify-items: center;
     width: 90vw;
     display: grid;
     align-items: center;
-    justify-items: center;
     row-gap: 70px;
     margin: 100px auto;
 }
@@ -748,13 +746,18 @@ input:-webkit-autofill{
     color: var(--bs-gray-700);
     position: relative;
     z-index: 20;
-    padding: 2rem 2.5rem;
+    padding: 2rem 1.5rem;
     font-family: var(--font-satoshi-regular);
     font-size: 1.65rem;
     line-height: 1.5;
     border-radius: 20px;
     overflow: hidden;
     transform: translateY(-100px);
+}
+
+.article a{
+    color: rgb(0, 128, 255);
+    text-decoration: underline;
 }
 
 
@@ -807,25 +810,18 @@ input:-webkit-autofill{
     position: absolute;
     width: 100%;
     height: 100%;
-    top: 0;
-    left: 0;
+    padding: 20px;
     z-index: 10;
     background: rgba(25, 25, 25, 0.6);
     backdrop-filter: blur(35px);
     -webkit-backdrop-filter: blur(35px);
-    border:2px solid transparent;
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    padding: 20px;
 }
 
 .article__bg-image{
     width: 100%;
     position: absolute;
     z-index: -10;
-}
-
-.article__heroImage{
-    border-radius: 20px;
 }
 
 .article__info{
@@ -873,7 +869,7 @@ input:-webkit-autofill{
     .article{
         font-size: 1.65rem;
         line-height: 1.6;
-        padding: 4rem 5rem;
+        padding: 7rem 5rem;
     }
 
     .article p{
@@ -991,7 +987,7 @@ input:-webkit-autofill{
     border-radius: 5px;
 }
 
-#likes-count{
+.likes-count{
     width: 15px;
 }
 
@@ -1059,6 +1055,7 @@ input:-webkit-autofill{
     align-items: center;
 }
 
+
 .logo-container{
     font-size: 4rem;
     font-weight: 900;
@@ -1106,8 +1103,8 @@ input:-webkit-autofill{
         position: absolute;
         right: 0;
         flex-direction: column;
-        height: calc(100vh - 62.65px);
-        top: 62.65px;
+        height: calc(100vh - 50px);
+        top: 50px;
         background-color: black;
         font-weight: bold;
         justify-content: flex-start;

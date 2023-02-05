@@ -7,19 +7,19 @@
   <article class="card <%= (index + 1) % 5 === 0 && "take-2-columns" %> ">
     <a href="/articles/<%= article.slug %>">
       <section class="card__header">
-        <img
+        <img loading="lazy"
           class="articleImg"
           src="<%= article.heroImage.replace("/upload", "/upload/w_1000,f_auto")  %> "
           alt="{post.title}"
         />
       </section>
       <section class="card__body">
-        <img src="<%= article.heroImage.replace("/upload", "/upload/w_1000,f_auto")  %>" class="card__bg-image" alt="" />
+        <img loading="lazy" src="<%= article.heroImage.replace("/upload", "/upload/w_1000,f_auto")  %>" class="card__bg-image" alt="" />
         <div class="glass-2">
           <!-- <div class="author grid">
             <div class="author__div">
               <div class="author__img">
-                <img src="<%= article.heroImage %> " alt="" />
+                <img loading="lazy" src="<%= article.heroImage %> " alt="" />
               </div>
               <div class="author__div2">
                 <span class="author__name"

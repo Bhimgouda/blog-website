@@ -92,7 +92,7 @@ router.get(
       .populate("category");
     article.heroImage = article.heroImage.replace("/upload", "/upload/w_700,f_auto")
     // req.session.liked has an object that has slug:true(liked or not liked as per article and for unique user session)
-    res.render("articles/show", { article, liked: req.session.liked && req.session.liked[slug] || false });
+    res.render("articles/show", { article, liked: req.session.liked && req.session.liked[slug] || false, css: process.env.CSS });
     return await Article.findOneAndUpdate({slug}, {$inc: {reads: 1}});
   })
 );

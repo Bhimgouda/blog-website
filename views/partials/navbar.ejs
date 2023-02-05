@@ -10,13 +10,13 @@
     </div>
     <ul class="nav__links">
       <a href="/articles" class="nav__link">Blogs</a>
-      <a href="/articles/new">Publish an Epic</a>
-
+      
       <% if(!currentAuthor){ %>
-      <a href="/author/login" class="nav__link">Login</a>
-      <a href="/author/register" class="nav__link">Register</a>
+        <!-- <a href="/author/login" class="nav__link">Login</a>
+          <a href="/author/register" class="nav__link">Register</a> -->
       <% }else{ %>
-      <a href="/author/logout" class="nav__link">Logout</a>
+        <a href="/articles/new">Publish an Epic</a>
+        <a href="/author/logout" class="nav__link">Logout</a>
       <% } %>
     </ul>
   </div>
