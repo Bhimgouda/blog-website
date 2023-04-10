@@ -5,7 +5,7 @@
     <% headings.forEach((heading, index)=>{
     %>
     <div data-toc="heading-<%=index%>" class="toc__content line-clamp-1">
-      <%= heading.slice(3) %>
+      <%= heading.slice(3).replace("&nbsp;", " ") %>
     </div>
     <% }) %>
 </div>

@@ -24,8 +24,13 @@
 
       <div class="article__header article__header--text-editor">
         <div class="article__info">
-          <input class="article__title" type="text" id="title" name="title" placeholder="Title goes here..." /><br>
-          <span data-for="title" class="invalid">char:<span>0</span> (from 25 to 70 char)</span>
+          <input class="article__title" type="text" id="title" name="title" placeholder="Title..." /><br>
+          <span data-for="title" class="invalid">char:<span>0</span> (from 25 to 70 char)**Mandatory</span>
+          <div>
+            <!-- <label class="label" for="tagline">Add a Tagline*</label> -->
+            <input id="tagline" type="text" name="tagline" placeholder="Tagline" />
+            <span data-for="tagline" class="invalid">char:<span>0</span> (from 40 to 60 char)</span>
+          </div>
         </div>
       </div>
 
@@ -51,7 +56,7 @@
 
       <!-- Meta deta And SEO inputs -->
       <div class="seo-inputs ">
-        <h2 class="seo-heading">Fill It Up If you aspire to rank on GOOGLE</h2>
+        <h2 class="seo-heading">Basic SEO</h2>
         
         <div>
           <input type="text" id="seoTitle" name="seoTitle" placeholder="SEO-title" />
@@ -61,20 +66,16 @@
         <div>
           <!-- <label class="label" for="description">Add A Description*</label> -->
           <textarea rows="3" id="description" type="text" name="description" placeholder="Description" ></textarea>
-          <span data-for="description" class="invalid">char:<span>0</span> (from 120 to 150 char)</span>
+          <span data-for="description" class="invalid">char:<span>0</span> (from 120 to 200 char)**Mandatory</span>
         </div>
 
-        <div>
-          <!-- <label class="label" for="tagline">Add a Tagline*</label> -->
-          <input id="tagline" type="text" name="tagline" placeholder="Tagline" />
-          <span data-for="tagline" class="invalid">char:<span>0</span> (from 40 to 60 char)</span>
-        </div>
 
-        <div>
+
+        <!-- <div> -->
           <!-- <label class="label" for="keywords">Add a Few Keywords*</label> -->
-          <input id="keywords" type="text" name="keywords" placeholder="Add keywords like this nft,defi,web3" />
-          <span data-for="keywords" class="invalid">keywords added: <span>0</span> (Add from 2 to 5 kewyords)</span>
-        </div>
+          <!-- <input id="keywords" type="text" name="keywords" placeholder="Add keywords like this nft,defi,web3" /> -->
+          <!-- <span data-for="keywords" class="invalid">keywords added: <span>0</span> (Add from 2 to 5 kewyords)</span> -->
+        <!-- </div> -->
 
         <div>
           <!-- <label class="label" for="category">Choose A Category*</label> -->
@@ -87,8 +88,8 @@
 
         <div>
           <!-- <label class="label" for="heroImage">Add A Hero-Image*</label> -->
-          <input type="file" name="heroImage" id="heroImage" placeholder="Add Image Link" />
-          <span data-for="heroImage" class="invalid">Choose a img file</span>
+          <input type="file" accept="image/jpeg, image/png" name="heroImage" id="heroImage" placeholder="Add Image Link" />
+          <span data-for="heroImage" class="invalid">Choose a img file**Mandatory</span>
         </div>
 
       </div>

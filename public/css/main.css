@@ -883,6 +883,10 @@ input:-webkit-autofill{
     .article ul:last-of-type{
     margin: 0 0 3.5rem;
     }
+
+    .article__heroImage{
+        padding: 0 100px;
+    }
 }
 
 @media screen and (min-width:1440px) {

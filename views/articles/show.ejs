@@ -4,9 +4,23 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= article.seoTitle %></title>
+    <title><%= article.seoTitle || article.title %></title>
     <meta name="description" content="<%= article.description %>" />
-    <meta name="keywords" content="<%= article.keywords %>" />
+    <!-- <meta name="keywords" content="<%= article.keywords %>" /> -->
+
+    <!-- Twitter social cards -->
+    <meta name="twitter:card" content="<%= article.seoTitle || article.title %>">
+    <meta name="twitter:title" content="<%= article.seoTitle || article.title %>">
+    <meta name="twitter:description" content="<%= article.description %>">
+    <meta name="twitter:image" content="<%= article.heroImage %>">
+
+    <!-- Linkedin social cards -->
+    <meta property="og:title" content="<%= article.seoTitle || article.title %>">
+    <meta property="og:description" content="<%= article.description %>">
+    <meta property="og:image" content="<%= article.heroImage %>">
+    <meta property="og:url" content="blockmate.com">
+    <meta property="og:type" content="article">
+
     <link rel="stylesheet" href="<%= css %>" />
   </head>
   <body>
@@ -66,6 +80,11 @@
       </div>
 
         <div class="article">
+          <img
+            class="article__heroImage"
+            src="<%= article.heroImage%>"
+            alt=""
+          />
           <%- article.content%>
           
           <div id="author-box" class="author-box--mobile">
